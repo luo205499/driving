@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加试题</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <script src="js/jquery-3.2.1.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <style>
+        html, body {
+            overflow: hidden;
+            background: #14191C;
+            margin: 0;
+        }
+
+        .all{
+            position: absolute;
+            z-index: 777;
+        }
+        .examleft{
+            margin-top: 150px;
+            border: solid 2px;
+            border-radius: 6%;
+            margin-left: 40px;
+            font-size: 18px;
+            color: #d1f5de;
+            font-weight: bold;
+        }
+        .listExam {
+            margin-top: 20px;
+            /*border: solid 2px;*/
+            border-radius: 6%;
+            margin-left: 40px;
+            font-size: 18px;
+            color: #d1f5de;
+            font-weight: bold;
+        }
+
+        .canvas{
+            position: absolute;
+            z-index: 666;
+            right: -80px;
+        }
+        .navbar-inverse input[type="text"] {
+            background: #313131;
+            border: none;
+            color: #999; }
+
+        .navbar-inverse .navbar-form {
+            position: relative; }
+
+        .navbar-form button[type="submit"] {
+            background: #313131;
+            border: none;
+            color: #999;
+            position: absolute;
+            top: 28%;
+            right: 8%; }
+
+        @media (min-width: 768px) {
+            .navbar-form button[type="submit"] {
+                top: 15%; } }
+        .item img {
+            width: 100%; }
+
+        .form-group input{
+            background-color: rgba(15, 15, 15, 0.7);
+            color: whitesmoke;
+        }
+        .fileinput-button {
+            position: relative;
+            display: inline-block;
+            overflow: hidden;
+            width: 200px;
+        }
+        .fileinput-button input{
+            font-size: 16px;
+            color: whitesmoke;
+        }
+        .time{
+            position:absolute;
+            z-index:888;
+            margin-left:-100px;
+            margin-top:-280px;
+            top:50%;
+            left:50%;
+        }
+    </style>
+</head>
+<body>
+<!--导航-->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button class="navbar-toggle" data-toggle="collapse"
+                    data-target="#response-collapse">
+                <span class="icon-bar"></span> <span class="icon-bar"></span> <span
+                    class="icon-bar"></span>
+            </button>
+            <a href="backHome" class="navbar-brand"><strong>毕业设计</strong></a>
+        </div>
+        <div class="collapse navbar-collapse" id="response-collapse">
+            <ul class="nav navbar-nav" id="nav">
+                <li class="itemdisplay" style="display: block"><a href="#">题库</a></li>
+                <li><a href="#" id="mockExam">模拟考试</a></li>
+                <li><a href="#">随机练习</a></li>
+                <li><a href="#">顺序练习</a></li>
+                <li><a href="#">联系我们</a></li>
+            </ul>
+            <form action="" class="navbar-form navbar-left">
+                <input type="text" placeholder="搜索" class="form-control">
+                <button type="submit">
+                    <span class="glyphicon glyphicon-search"></span>
+                </button>
+            </form>
+        </div>
+    </div>
+</nav>
+<!--试题-->
+<div class="container all row">
+    <div class="col-md-8 col-sm-6 col-xs-6  examleft">
+        <div class="listExam">
+            <div class="form-group col-md-4">
+                <label for="coments">试题内容：
+                    <textarea rows="4" cols="30" style=" background-color: rgba(15, 15, 15, 0.7);color:whitesmoke;" name="coments" class="form-control" id="coments"></textarea></label>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="itemA">A选项：
+                    <input type="text" name="itemA" class="form-control" id="itemA"></label>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="itemB">B选项：
+                    <input type="text" name="itemB" class="form-control" id="itemB"></label>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="itemC">C选项：
+                    <input type="text" name="itemC" class="form-control" id="itemC"></label>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="itemD">D选项：
+                    <input type="text" name="itemD" class="form-control" id="itemD"></label>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="ansewr">答案：
+                    <input type="text" name="ansewr" class="form-control" id="ansewr"></label>
+            </div>
+            <div class="form-group col-md-4">
+                 <span class="fileinput-button">
+                    添加图片:</p>
+                     <input type="file">
+                </span>
+            </div>
+            <div class="form-group col-md-4">
+                试题类型:</p>
+                <select id="type" class="btn type" style="background-color: #14191C;font-size: 16px">
+                    <option value ="0">判断题</option>
+                    <option value ="1">选择题</option>
+                </select>
+            </div>
+            <p></p>
+            <div class="form-group text-center ">
+
+                <input type="button" name="" id="addItem" class="btn btn-block" value="提交">
+            </div>
+        </div>
+    </div>
+    <canvas class="canvas" id="canvas" style="display:block; margin:50px auto;">当前浏览器不支持canvascanvas</canvas>
+</div>
+<div class="time">
+    <script type="text/javascript" src="js/clock.js"></script></div>
+</body>
+<!--<script src="js/clock.js"></script>-->
+<script src="js/clock.swf"></script>
+<script src="js/beijing.js"></script>
+<script src="js/lang.js"></script>
+<!--<script src="js/huiTaiLang.js"></script>-->
+<script>
+    $(function () {
+        var storage=window.localStorage;
+
+        //添加试题
+        $("#addItem").on("click", function () {
+            $.ajax({
+                url: "/addItem" ,//url
+                type: "POST",//方法类型
+                dataType: "json",//预期服务器返回的数据类型
+                data: {
+                    coments:$("#coments").val(),
+                    itemA:$("#itemA").val(),
+                    itemB:$("#itemB").val(),
+                    itemC:$("#itemC").val(),
+                    itemD:$("#itemD").val(),
+                    answer:$("#answer").val(),
+                    img:$("#img").val(),
+                    type:$("#type").val()
+                },
+                success: function (res) {
+                    alert("成功！");
+                },
+                error : function() {
+                    alert("失败！");
+                }
+            });
+        });
+        //显示\隐藏题库
+        itemdisplay();
+        function itemdisplay() {
+            if(storage.getItem("type")!=1){
+                $(".itemdisplay").css("display","none");
+            }
+        }
+    })
+</script>
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>顺序练习</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <script src="js/jquery-3.2.1.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <style>
+        html, body {
+            overflow: hidden;
+            background: #14191C;
+            margin: 0;
+        }
+
+        .all{
+            position: absolute;
+            z-index: 999;
+        }
+        .listExam {
+            margin-top: 160px;
+            border: solid 1px;
+            border-radius: 6%;
+            margin-left: 40px;
+            font-size: 18px;
+        }
+
+        .list-group-item-heading {
+            list-style: none;
+            color: whitesmoke;
+            margin-left: 40px;
+            margin-top: 20px;
+        }
+        .listExam{
+            color: #d1f5de;
+        }
+        .canvas{
+            position: absolute;
+            z-index: 666;
+            right: -20px;
+        }
+        .navbar-inverse input[type="text"] {
+            background: #313131;
+            border: none;
+            color: #999; }
+
+        .navbar-inverse .navbar-form {
+            position: relative; }
+
+        .navbar-form button[type="submit"] {
+            background: #313131;
+            border: none;
+            color: #999;
+            position: absolute;
+            top: 28%;
+            right: 8%; }
+
+        @media (min-width: 768px) {
+            .navbar-form button[type="submit"] {
+                top: 15%; } }
+        .item img {
+            width: 100%; }
+
+    </style>
+</head>
+<body>
+<!--导航-->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button class="navbar-toggle" data-toggle="collapse"
+                    data-target="#response-collapse">
+                <span class="icon-bar"></span> <span class="icon-bar"></span> <span
+                    class="icon-bar"></span>
+            </button>
+            <a href="backHome" class="navbar-brand"><strong>毕业设计</strong></a>
+        </div>
+        <div class="collapse navbar-collapse" id="response-collapse">
+            <ul class="nav navbar-nav" id="nav">
+                <li class="itemdisplay" style="display: block"><a href="#">题库</a></li>
+                <li><a href="#" id="mockExam">模拟考试</a></li>
+                <li><a href="#">随机练习</a></li>
+                <li><a href="#">顺序练习</a></li>
+                <li><a href="#">联系我们</a></li>
+            </ul>
+            <form action="" class="navbar-form navbar-left">
+                <input type="text" placeholder="搜索" class="form-control">
+                <button type="submit">
+                    <span class="glyphicon glyphicon-search"></span>
+                </button>
+            </form>
+        </div>
+    </div>
+</nav>
+<!--试题-->
+<div class="container all">
+    <div class="col-md-8 col-sm-6 col-xs-6  examleft">
+        <div class="listExam">
+            <ul class="list-group list">
+                <li class="list-group-item-heading"><span class="itemNo">(题号)</span>
+                    <span class="itemComment">这里是试题内容</span></li>
+                <li class="list-group-item-heading examItem" id="examItem">
+                    <p class="itemA"></p>
+                    <p class="itemB"></p>
+                    <p class="itemC"></p>
+                    <p class="itemD"></p> <span class="img">图片</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <canvas class="canvas" id="canvas" style="display:block; margin:50px auto;">当前浏览器不支持canvascanvas</canvas>
+    <!--<button class="btn btn-success">按钮</button>-->
+</div>
+</body>
+<script src="js/beijing.js"></script>
+<script src="js/lang.js"></script>
+<!--<script src="js/huiTaiLang.js"></script>-->
+<script>
+    $(function () {
+        var storage=window.localStorage;
+        //点击题目
+        function examItem() {
+            $('#examItem').on('change', 'input', function() {
+
+                    answer = getItem();
+                    if (answer == $(this).val()) {
+                          alert("第"+itemID+"题回答正确");
+                    } else {
+                         alert("回答错误,正确答案:"+answer);
+                    }
+
+            })
+        }
+        examItem();
+        var pageStart = 0; //题目号
+        var pageNum = 0; //重第0行开始查询
+        var answer = ""; //答案
+        var itemID = 0; //题目id
+        var type=0; //题目类型
+        //获取试题
+        getItem();
+        function getItem() {
+            $.ajax({
+                url : "practiceOrder",
+                async : true,
+                data : {
+                    pageNum:pageNum
+                },
+                type : "POST",
+                dataType : "json",
+                success : function(res) {
+                    answer = res.answer;
+                    type= res.type;
+                    itemID = pageStart;
+                    $(".itemNo").html(pageStart);
+                    $(".itemComment").html(res.coments);
+                    if (type==0) {
+                        $(".itemA").html("<input type='radio' name='item' value='对' />" + res.itemA);
+                        $(".itemB").html("<input type='radio' name='item' value='错' />" + res.itemB);
+                        $(".itemC").html("");
+                        $(".itemD").html("");
+                    }else{
+                        $(".itemA").html("<input type='radio' name='item' value='A' />" + res.itemA);
+                        $(".itemB").html("<input type='radio' name='item' value='C' />" + res.itemB);
+                        $(".itemC").html("<input type='radio' name='item' value='C' />" + res.itemC);
+                        $(".itemD").html("<input type='radio' name='item' value='D' />" + res.itemD);
+                    }
+                    $(".img").html(res.img);
+                    // console.log(pageStart + "正确答案" + answer);
+                }
+            });
+            pageNum = pageNum + 1;
+            pageStart = pageStart + 1;
+            return answer;
+        }
+        //显示\隐藏题库
+        itemdisplay();
+        function itemdisplay() {
+            if(storage.getItem("type")!=1){
+                $(".itemdisplay").css("display","none");
+            }
+        }
+    })
+</script>
+</html>

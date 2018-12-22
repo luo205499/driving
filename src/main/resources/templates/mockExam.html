@@ -1,0 +1,548 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>模拟考试</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <script src="js/jquery-3.2.1.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/beijing.js"></script>
+    <style>
+        .timespan {
+            font-size: 20px;
+            color: #1330d8;
+            font-weight: bolder;
+            margin-top: 120px;
+            margin-bottom: 20px;
+            font-family: Arial, Verdana, "微软雅黑";
+        }
+
+        .J_TbData {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .listExam {
+            margin-top: 160px;
+            border: solid 1px;
+            border-radius: 6%;
+            margin-left: 40px;
+            font-size: 18px;
+        }
+
+        .list-group-item-heading {
+            list-style: none;
+            color: whitesmoke;
+            margin-left: 40px;
+            margin-top: 20px;
+        }
+
+
+        html, body {
+            overflow: hidden;
+            margin: 0;
+            background: #14191C;
+        }
+
+        html {
+
+        }
+
+        .all {
+            position: absolute;
+            z-index: 999;
+        }
+
+        .J_TbData {
+            color: #bdbdbd;
+        }
+
+        .examItem {
+            /*background-color: #a2a2a2;*/
+
+        }
+
+        .itemright {
+            /*margin-right: 60px;*/
+            padding-left: 60px;
+        }
+        .navbar-inverse input[type="text"] {
+            background: #313131;
+            border: none;
+            color: #999; }
+
+        .navbar-inverse .navbar-form {
+            position: relative; }
+
+        .navbar-form button[type="submit"] {
+            background: #313131;
+            border: none;
+            color: #999;
+            position: absolute;
+            top: 28%;
+            right: 8%; }
+
+        @media (min-width: 768px) {
+            .navbar-form button[type="submit"] {
+                top: 15%; } }
+        .item img {
+            width: 100%; }
+
+
+        .login-modal {
+            padding-top: 30px; }
+        .login-modal .modal-content {
+            background-color: rgba(144, 223, 255, 0.15);
+            color: #fefff6; }
+        .login-modal .modal-content .modal-body input {
+            color: white;
+            background: rgba(0, 0, 0, 0.45); }
+        .login-modal .modal-content .modal-header .close {
+            color: #ff110c; }
+        .login-modal .modal-content .modal-footer {
+            text-align: center; }
+        .login-modal .modal-content .modal-footer .btn {
+            font-size: 16px;
+            background: rgba(0, 0, 0, 0.92);
+            width: 150px; }
+
+        .register-modal {
+            padding-top: 50px; }
+        .register-modal .modal-content {
+            background-color: rgba(144, 223, 255, 0.15);
+            color: #fefff6; }
+        .register-modal .modal-content .modal-body input {
+            color: white;
+            background: rgba(0, 0, 0, 0.45); }
+        .register-modal .modal-content .modal-header .close {
+            color: #ff110c; }
+        .register-modal .modal-content .modal-footer {
+            text-align: center; }
+        .register-modal .modal-content .modal-footer .btn {
+            font-size: 16px;
+            background: rgba(0, 0, 0, 0.92);
+            width: 150px; }
+
+
+    </style>
+</head>
+<!--<body onload="RunOnBeforeUnload()">-->
+<body>
+<!--导航-->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button class="navbar-toggle" data-toggle="collapse"
+                    data-target="#response-collapse">
+                <span class="icon-bar"></span> <span class="icon-bar"></span> <span
+                    class="icon-bar"></span>
+            </button>
+            <a href="backHome" class="navbar-brand"><strong>毕业设计</strong></a>
+        </div>
+        <div class="collapse navbar-collapse" id="response-collapse">
+            <ul class="nav navbar-nav" id="nav">
+                <li class="itemdisplay" style="display: block"><a href="#">题库</a></li>
+                <li><a href="mockExam" id="mockExam">模拟考试</a></li>
+                <li><a href="#">随机练习</a></li>
+                <li><a href="#">顺序练习</a></li>
+                <li><a href="#">联系我们</a></li>
+            </ul>
+            <form action="" class="navbar-form navbar-left">
+                <input type="text" placeholder="搜索" class="form-control">
+                <button type="submit">
+                    <span class="glyphicon glyphicon-search"></span>
+                </button>
+            </form>
+            <div class="profile navbar-right">
+                <ul class="nav navbar-nav">
+                    <li class="nowuser" style="display: none;"><a href="#" id="loginOut">退出当前用户:</a></li>
+                    <li><a href="queryUser" class="usernamedisplay"></a></li>
+                    <li class="displaylogin"><a href="#" data-toggle="modal"
+                                                data-target="#login-modal">登录</a></li>
+                    <li class="displaylogin"><a href="#" data-toggle="modal"
+                                                data-target="#register-modal">注册</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+<!--//登录-->
+<div class="modal fade login-modal" id="login-modal" tabindex="-1">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal">&times;</button>
+                <h4>
+                    <b>用户登录</b>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <!--<form method="post">-->
+                    <div class="form-group">
+                        <label for="username">Username <!--<span
+                                class="glyphicon glyphicon-user"></span> --><input type="text"
+                                                                                   name="username" class="form-control"
+                                                                                   id="username"
+                                                                                   placeholder="输入用户名"
+                                                                                   style="padding-left: 22px"></label>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password <!--<span
+                                class="glyphicon glyphicon-lock"></span> --><input type="password"
+                                                                                   name="password" class="form-control"
+                                                                                   id="password"
+                                                                                   placeholder="输入密码"
+                                                                                   style="padding-left: 22px"></label>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="submit" class="btn btn-group-xs" id="userLogin" value="login">
+                        <!--<button onclick="loginUser()" class="btn btn-group-xs">login</button>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--//注册-->
+<div class="modal fade login-modal" id="register-modal" tabindex="-1">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal">&times;</button>
+                <h4>
+                    <b>用户注册</b>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div id="form2">
+                    <div class="form-group">
+                        <label for="username">Username <input type="text"
+                                                              name="username" class="form-control"
+                                                              id="rusername"
+                                                              placeholder="输入用户名"
+                                                              style="padding-left: 22px"></label>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password
+                            <input type="password"
+                                   name="password" class="form-control"
+                                   id="rpassword"
+                                   placeholder="输入密码"
+                                   style="padding-left: 22px"></label>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-group-xs" id="userRegister">注册</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--试题-->
+<div class="container all">
+    <div class="row">
+        <div class="col-md-8 col-sm-6 col-xs-6  examleft">
+            <div class="listExam">
+                <ul class="list-group list">
+                    <li class="list-group-item-heading"><span class="itemNo">(题号)</span>
+                        <span class="itemComment">这里是试题内容</span></li>
+                    <li class="list-group-item-heading examItem" id="examItem">
+                        <p class="itemA"></p>
+                        <p class="itemB"></p>
+                        <p class="itemC"></p>
+                        <p class="itemD"></p> <span class="img">图片</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-6 col-xs-6  itemright">
+            <div class="time">
+                <div class="timespan">
+                    <span>剩余时间</span> <span class="joinm time"></span><span> :</span>
+                    <span class="joins time"></span>
+                </div>
+
+            </div>
+            <table border="1px" id="J_TbData"
+                   class="J_TbData table tab-content text-center table-bordered">
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+
+<script type="text/javascript">
+    //刷新提示
+    //    function RunOnBeforeUnload() {window.onbeforeunload = function(){ return '将丢失未保存的数据!'; } }
+    //申明localstorage
+    var storage=window.localStorage;
+    //从localstorage获得用户信息
+    $(".usernamedisplay").text(storage.getItem("username"));
+    //刷新当前用户
+    setInterval(function () {
+        displayuser();
+    },1000);
+
+    //登陆成功后隐藏登录注册按钮
+    function displayuser() {
+        a = $(".usernamedisplay").text();
+        if (a!="") {
+            $(".displaylogin").css('display', 'none');
+            $(".nowuser").css('display', 'block');
+        }
+    }
+
+    //登录
+    $("#userLogin").on("click", function () {
+        $.ajax({
+            url: "/login" ,//url
+            type: "POST",//方法类型
+            dataType: "json",//预期服务器返回的数据类型
+            data: {username:$("#username").val(),password:$("#password").val()},
+            success: function (res) {
+                storage.setItem("username",res.username);
+                storage.setItem("id",res.id);
+                storage.setItem("type",res.type);
+                window.location.reload(); //刷新当前页面
+            },
+            error : function() {
+                alert("登录失败！");
+            }
+        });
+    });
+
+    //注册
+    $("#userRegister").on("click",function () {
+        $.ajax({
+            url:"/register",
+            type:"POST",
+            dataType:"json",
+            data: {username:$("#rusername").val(),password:$("#rpassword").val()},
+            success :function(res) {
+                alert("注册成功");
+                storage.setItem("username",res.username);
+                storage.setItem("id",res.id);
+                storage.setItem("type",res.type);
+                window.location.reload(); //刷新当前页面
+            },error : function() {
+                alert("注册失败！");
+            }
+
+        });
+    });
+    //退出登录
+    $("#loginOut").on("click",function () {
+        localStorage.removeItem("username");
+        localStorage.removeItem("id");
+        localStorage.removeItem("type");
+        window.location.reload(); //刷新当前页面
+    });
+    //显示\隐藏题库
+    itemdisplay();
+    function itemdisplay() {
+        if(storage.getItem("type")!=1){
+            $(".itemdisplay").css("display","none");
+        }
+    }
+
+    var setTimer = null;
+    var chazhi = 0;
+    //差值计算
+    //例子(模拟)
+    // chazhi = 15880;
+    chazhi = 2699600;
+    //真实时间(注意月份需减掉1，否则时间会计算错误)
+    //chazhi = (new Date(year,month-1,day,hour,minute,second)) - (new Date()); //计算剩余的毫秒数
+    //chazhi = (new Date(2018,8-1,6,6,6,6)) - (new Date());
+
+    //执行函数部分
+    countFunc(chazhi);
+    setTimer = setInterval(function() {
+        chazhi = chazhi - 1000;
+        countFunc(chazhi);
+    }, 1000);
+
+    function countFunc(leftTime) {
+        if (leftTime >= 0) {
+            var days = parseInt(leftTime / 1000 / 60 / 60 / 24, 10); //计算剩余的天数
+            var hours = parseInt(leftTime / 1000 / 60 / 60 % 24, 10); //计算剩余的小时
+            var minutes = parseInt(leftTime / 1000 / 60 % 60, 10); //计算剩余的分钟
+            var seconds = parseInt(leftTime / 1000 % 60, 10); //计算剩余的秒数
+            days = checkTime(days);
+            hours = checkTime(hours);
+            minutes = checkTime(minutes);
+            seconds = checkTime(seconds);
+            $(".joind").html(days);
+            $(".joinh").html(hours);
+            $(".joinm").html(minutes);
+            $(".joins").html(seconds);
+        } else {
+            clearInterval(setTimer);
+            /*$(".joind").html("00");
+            $(".joinh").html("00");*/
+            $(".joinm").html("00");
+            $(".joins").html("00");
+        }
+    }
+
+    function checkTime(i) { //将0-9的数字前面加上0，例1变为01
+        if (i < 10) {
+            i = "0" + i;
+        }
+        return i;
+    }
+
+
+//生成答案表格
+    function addTable() {
+        var html = "";
+        for (var i = 1, j = i + 1, k = j + 1, l = k + 1, a = l + 1; i <= 100; i += 5, j = i + 1, k = j + 1, l = k + 1, a = l + 1) {
+
+            html += "<tr>";
+            html += "<td id='" + i + "'>" + i + "</td>";
+            html += "<td id='" + j + "'>" + j + "</td>";
+            html += "<td id='" + k + "'>" + k + "</td>";
+            html += "<td id='" + l + "'>" + l + "</td>";
+            html += "<td id='" + a + "'>" + a + "</td>";
+            html += "</tr>";
+
+        }
+        $("#J_TbData").html(html);
+    }
+    addTable();
+
+
+    $(function() {
+
+        //定时器，结束考试
+        setTimeout(function () {
+            stopExam();//结束考试
+            addExam();//如果用户登录，将考试信息插入数据库
+        },
+            // 15880
+            2699600
+        );
+        //点击题目
+        function examItem() {
+            $('#examItem').on('change', 'input', function() {
+
+                if (pageNum >= 100) {
+                    $(".listExam").html("本次考试得分："+grade);
+                    $(".listExam").css("color","#fff");
+                    alert("完成考试");
+                    addExam();
+                    answer = getItem();
+                    /*  console.log("正确答案"+answer) */
+                    if (answer == $(this).val()) {
+                        /* console.log("选择答案"+$(this).val()) */
+                        /*  alert("第"+itemID+"题回答正确"); */
+                        grade = grade + 1;
+                        $('#' + itemID).css({
+                            'background' : '#1fd32f',
+                            'color' : '#ffffff'
+                        });
+                    } else {
+                        /* alert("回答错误"); */
+                        $('#' + itemID).css({
+                            'background' : '#d30800',
+                            'color' : '#ffffff'
+                        });
+                    }
+                } else {
+                    answer = getItem();
+                    /*  console.log("正确答案"+answer) */
+                    if (answer == $(this).val()) {
+                        /* console.log("选择答案"+$(this).val()) */
+                        /*  alert("第"+itemID+"题回答正确"); */
+                        grade = grade + 1;
+                        $('#' + itemID).css({
+                            'background' : '#1fd32f',
+                            'color' : '#ffffff'
+                        });
+                    } else {
+                        /* alert("回答错误"); */
+                        $('#' + itemID).css({
+                            'background' : '#d30800',
+                            'color' : '#ffffff'
+                        });
+
+                    }
+                }
+
+            })
+        }
+        examItem();
+
+        var pageStart = 0; //题目号
+        var pageNum = 0; //重第0行开始查询
+        var answer = ""; //答案
+        var itemID = 0; //题目id
+        var grade = 0;
+        //获取试题
+        function getItem() {
+            $.ajax({
+                url : "getitem",
+                async : true,
+                data : {
+                    pageNum:pageNum
+                },
+                type : "POST",
+                dataType : "json",
+                success : function(res) {
+                    $(".itemNo").html(pageStart);
+                    $(".itemComment").html(res.coments);
+                    if (pageStart <= 40) {
+                        $(".itemA").html("<input type='radio' name='item' value='对' />" + res.itemA);
+                        $(".itemB").html("<input type='radio' name='item' value='错' />" + res.itemB);
+                    }
+                    if (pageStart > 40) {
+                        $(".itemA").html("<input type='radio' name='item' value='A' />" + res.itemA);
+                        $(".itemB").html("<input type='radio' name='item' value='C' />" + res.itemB);
+                    }
+                    if (pageStart > 40) {
+                        $(".itemC").html("<input type='radio' name='item' value='C' />" + res.itemC);
+                        $(".itemD").html("<input type='radio' name='item' value='D' />" + res.itemD);
+                    }
+                    $(".img").html(res.img);
+                    answer = res.answer;
+                    itemID = pageStart;
+                    // console.log(pageStart + "正确答案" + answer);
+                }
+            });
+            pageNum = pageNum + 1;
+            pageStart = pageStart + 1;
+
+            return answer;
+        }
+        getItem();
+
+
+        //时间结束停止答题
+        function stopExam() {
+            alert("考试结束");
+            $(".listExam").html("本次考试得分：" + grade);
+            $(".listExam").css("color", "#fff");
+        }
+        //考试结束生成成绩表
+        function addExam() {
+            if(storage.getItem("id")==undefined){
+                // alert("没有用户");
+            }
+            else{
+                alert("分数"+grade+"用户id"+storage.getItem("id"));
+                $.ajax({
+                    url:"/addExam",
+                    type:"POST",
+                    dataType:"json",
+                    data: {uid:storage.getItem("id"),grade:grade},
+                    success :function(res) {
+                    },error : function() {
+                    }
+
+                });
+            }
+        }
+    })
+</script>
+</html>

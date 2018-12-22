@@ -1,0 +1,74 @@
+body {
+  background-color: #000000;}
+
+.navbar-inverse input[type="text"] {
+  background: #313131;
+  border: none;
+  color: #999; }
+
+.navbar-inverse .navbar-form {
+  position: relative; }
+
+.navbar-form button[type="submit"] {
+  background: #313131;
+  border: none;
+  color: #999;
+  position: absolute;
+  top: 28%;
+  right: 8%; }
+
+@media (min-width: 768px) {
+  .navbar-form button[type="submit"] {
+    top: 15%; } }
+.item img {
+  width: 100%; }
+
+.glyphicon-user {
+  position: absolute;
+  top: 25%;
+  left: 20px; }
+
+.glyphicon-lock {
+  position: absolute;
+  top: 66.5%;
+  left: 20px; }
+
+.carousel {
+  background-color: #000;
+  height: 100%; }
+
+.login-modal {
+  padding-top: 30px; }
+  .login-modal .modal-content {
+    background-color: rgba(144, 223, 255, 0.15);
+    color: #fefff6; }
+    .login-modal .modal-content .modal-body input {
+      color: white;
+      background: rgba(0, 0, 0, 0.45); }
+    .login-modal .modal-content .modal-header .close {
+      color: #ff110c; }
+    .login-modal .modal-content .modal-footer {
+      text-align: center; }
+      .login-modal .modal-content .modal-footer .btn {
+        font-size: 16px;
+        background: rgba(0, 0, 0, 0.92);
+        width: 150px; }
+
+.register-modal {
+  padding-top: 50px; }
+  .register-modal .modal-content {
+    background-color: rgba(144, 223, 255, 0.15);
+    color: #fefff6; }
+    .register-modal .modal-content .modal-body input {
+      color: white;
+      background: rgba(0, 0, 0, 0.45); }
+    .register-modal .modal-content .modal-header .close {
+      color: #ff110c; }
+    .register-modal .modal-content .modal-footer {
+      text-align: center; }
+      .register-modal .modal-content .modal-footer .btn {
+        font-size: 16px;
+        background: rgba(0, 0, 0, 0.92);
+        width: 150px; }
+
+/*# sourceMappingURL=index.css.map */
