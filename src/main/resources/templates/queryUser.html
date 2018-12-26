@@ -102,7 +102,7 @@
     <div class="col-md-8 col-sm-6 col-xs-6  examleft">
         <div class="tableUser">
             <table class="table tab-content">
-                <th class="list-group-item-heading text-center username">用户名</th>
+                <th class="list-group-item-heading text-center username">试卷id</th>
                 <th class="list-group-item-heading text-center examItem" id="grade">分数</th>
                 <th class="list-group-item-heading text-center examItem" id="examTime">考试时间</th>
                 <tbody class="listUser"></tbody>
@@ -137,7 +137,7 @@
                     for (var i = 0;i<res.length;i++){
 
                         html += "<tr>";
-                        html += "<td class='text-center'>" + res[i].username + "</td>";
+                        html += "<td class='text-center'>" + res[i].id + "</td>";
                         html += "<td class='text-center'>" + res[i].grade + "</td>";
                         html += "<td class='text-center'>" + res[i].examTime + "</td>";
                         html += "</tr>";

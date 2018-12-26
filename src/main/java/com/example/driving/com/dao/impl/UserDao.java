@@ -69,7 +69,7 @@ public class UserDao implements IUserDao {
      */
     @Override
     public List queryUser(int id) {
-        String sql = "select u.username,e.grade,e.examTime from user as u,exam as e where u.id=e.u_id and u.id=?";
+        String sql = "select e.id,e.grade,e.examTime from user as u,exam as e where u.id=e.u_id and u.id=?";
         SqlRowSet rs = jdbcTemplate.queryForRowSet(sql,id);
         List<Map<String,Object>> list = jdbcTemplate.queryForList(sql,id);
         if(list==null){

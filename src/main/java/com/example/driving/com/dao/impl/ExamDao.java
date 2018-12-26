@@ -30,7 +30,6 @@ public class ExamDao implements IExamDao {
     @Override
     public int addExam(int uid, int grade) {
         String sql = "insert into exam (u_id,grade,examTime) values (?,?,?)";
-//        Date examTime = new Date();
         Timestamp examTime=new Timestamp(System.currentTimeMillis());
         return jdbcTemplate.update(sql, uid, grade,examTime);
     }
