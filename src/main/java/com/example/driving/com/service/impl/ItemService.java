@@ -23,6 +23,11 @@ public class ItemService implements IItemService {
 		return itemDao.getItem(pageNum);
 	}
 
+	@Override
+	public Item getItem4(int pageNum) {
+		return itemDao.getItem4(pageNum);
+	}
+
 	/**
 	 * 获取随机练习试题
 	 * @param pageNum

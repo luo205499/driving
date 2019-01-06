@@ -13,12 +13,13 @@
             margin: 0;
         }
 
-        .all{
+        .all {
             position: absolute;
             z-index: 999;
         }
+
         .listExam {
-            margin-top: 120px;
+            margin-top: 190px;
             border: solid 1px;
             border-radius: 6%;
             margin-left: 40px;
@@ -33,18 +34,22 @@
             margin-left: 40px;
             margin-top: 20px;
         }
-        .canvas{
+
+        .canvas {
             position: absolute;
             z-index: 666;
             right: -20px;
         }
+
         .navbar-inverse input[type="text"] {
             background: #313131;
             border: none;
-            color: #999; }
+            color: #999;
+        }
 
         .navbar-inverse .navbar-form {
-            position: relative; }
+            position: relative;
+        }
 
         .navbar-form button[type="submit"] {
             background: #313131;
@@ -52,20 +57,39 @@
             color: #999;
             position: absolute;
             top: 28%;
-            right: 8%; }
+            right: 8%;
+        }
 
         @media (min-width: 768px) {
             .navbar-form button[type="submit"] {
-                top: 15%; } }
-        .item img {
-            width: 100%; }
-img{
-    width: 400px;
-    height: 220px;
-    margin-left: 50px;
-    margin-bottom: 150px;
-    padding-right: 40px;
-}
+                top: 15%;
+            }
+        }
+
+        .img img {
+            width: 200px;
+            height: 160px;
+        }
+
+        img {
+            width: 400px;
+            height: 220px;
+            margin-left: 50px;
+            margin-bottom: 150px;
+            padding-right: 40px;
+        }
+
+        .t1 {
+            width: 300px;
+            height: 120px;
+            background: #fff;
+            position: absolute;
+            top: 10%;
+            left: 25%;
+            border-radius: 6%;
+            border: #979797;
+            z-index: 999;
+        }
     </style>
 </head>
 <body>
@@ -82,7 +106,7 @@ img{
         </div>
         <div class="collapse navbar-collapse" id="response-collapse">
             <ul class="nav navbar-nav" id="nav">
-                <li class="itemdisplay" style="display: block"><a href="#">题库</a></li>
+                <li class="itemdisplay" style="display: block"><a href="#">添加试题</a></li>
                 <li><a href="#" id="mockExam">模拟考试</a></li>
                 <li><a href="#">随机练习</a></li>
                 <li><a href="#">顺序练习</a></li>
@@ -118,55 +142,112 @@ img{
     <canvas class="canvas" id="canvas" style="display:block; margin:50px auto;">当前浏览器不支持canvascanvas</canvas>
     <!--<button class="btn btn-success">按钮</button>-->
 </div>
+<!--弹出框-->
+<div class="t1">
+    <div class="modal-header bg-info" style="font-size: 12px;">
+        <!--<span style="font-size: 12px;"></span>-->提示消息
+    </div>
+    <div class="tishi modal-body">
+
+    </div>
+</div>
 </body>
 <script src="js/beijing.js"></script>
 <script src="js/lang.js"></script>
 <!--<script src="js/huiTaiLang.js"></script>-->
 <script>
     $(function () {
-        var storage=window.localStorage;
+        var storage = window.localStorage;
+
         //点击题目
         function examItem() {
-            $('#examItem').on('change', 'input', function() {
+            $('#examItem').on('change', 'input', function () {
 
-                    answer = getItem();
-                    if (answer == $(this).val()) {
-                          alert("第"+itemID+"题回答正确");
-                    } else {
-                         alert("回答错误,正确答案:"+answer);
-                    }
+                answer = getItem();
+                if (answer == $(this).val()) {
+                    $(".tishi").html("第" + itemID + "题回答正确");
+                } else {
+                    $(".tishi").html("第" + itemID + "题回答错误,正确答案:" + answer);
+                    addWrongItem()
+                }
 
             })
         }
+
         examItem();
         var pageStart = 0; //题目号
         var pageNum = 0; //重第0行开始查询
         var answer = ""; //答案
         var itemID = 0; //题目id
-        var type=0; //题目类型
+        var type = 0; //题目类型
+        var coments = "";//试题内容
+        var itemA = "";
+        var itemB = "";
+        var itemC = "";
+        var itemD = "";
+        var img = "";
+        var type = 0;
+
+        //保存错题
+        function addWrongItem() {
+            if (storage.getItem("id") == undefined) {
+                // alert("没有用户");
+            } else {
+                $.ajax({
+                    url: "/addWrongItem",
+                    type: "POST",
+                    dataType: "json",
+                    data: {
+                        uid: localStorage.getItem("id"),
+                        answer: answer, //答案
+                        coments: coments,//试题内容
+                        itemA: itemA,
+                        itemB: itemB,
+                        itemC: itemC,
+                        itemD: itemD,
+                        img: img,
+                        type: type
+
+                    },
+                    success: function (res) {
+                    }, error: function () {
+                    }
+
+                });
+            }
+        }
+
+
         //获取试题
         getItem();
+
         function getItem() {
             $.ajax({
-                url : "practiceOrder",
-                async : true,
-                data : {
-                    pageNum:pageNum
+                url: "practiceOrder",
+                async: true,
+                data: {
+                    pageNum: pageNum
                 },
-                type : "POST",
-                dataType : "json",
-                success : function(res) {
+                type: "POST",
+                dataType: "json",
+                success: function (res) {
                     answer = res.answer;
-                    type= res.type;
+                    coments = res.coments;
+                    itemA = res.itemA;
+                    itemB = res.itemB;
+                    itemC = res.itemC;
+                    itemD = res.itemD;
+                    img = res.img;
+                    type = res.type;
                     itemID = pageStart;
                     $(".itemNo").html(pageStart);
                     $(".itemComment").html(res.coments);
-                    if (type==0) {
+                    if (type == 0) {
                         $(".itemA").html("<input type='radio' name='item' value='对' />" + res.itemA);
                         $(".itemB").html("<input type='radio' name='item' value='错' />" + res.itemB);
                         $(".itemC").html("");
                         $(".itemD").html("");
-                    }else{
+                    } else {
                         $(".itemA").html("<input type='radio' name='item' value='A' />" + res.itemA);
                         $(".itemB").html("<input type='radio' name='item' value='C' />" + res.itemB);
                         $(".itemC").html("<input type='radio' name='item' value='C' />" + res.itemC);
@@ -180,11 +261,13 @@ img{
             pageStart = pageStart + 1;
             return answer;
         }
+
         //显示\隐藏题库
         itemdisplay();
+
         function itemdisplay() {
-            if(storage.getItem("type")!=1){
-                $(".itemdisplay").css("display","none");
+            if (storage.getItem("type") != 1) {
+                $(".itemdisplay").css("display", "none");
             }
         }
     })

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>随机练习</title>
+    <title>错题</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <script src="js/jquery-3.2.1.js"></script>
     <script src="js/bootstrap.min.js"></script>
@@ -13,10 +13,11 @@
             margin: 0;
         }
 
-        .all{
+        .all {
             position: absolute;
             z-index: 999;
         }
+
         .listExam {
             margin-top: 190px;
             border: solid 1px;
@@ -31,21 +32,26 @@
             margin-left: 40px;
             margin-top: 20px;
         }
-        .listExam{
+
+        .listExam {
             color: #d1f5de;
         }
-        .canvas{
+
+        .canvas {
             position: absolute;
             z-index: 666;
             right: -20px;
         }
+
         .navbar-inverse input[type="text"] {
             background: #313131;
             border: none;
-            color: #999; }
+            color: #999;
+        }
 
         .navbar-inverse .navbar-form {
-            position: relative; }
+            position: relative;
+        }
 
         .navbar-form button[type="submit"] {
             background: #313131;
@@ -53,21 +59,27 @@
             color: #999;
             position: absolute;
             top: 28%;
-            right: 8%; }
+            right: 8%;
+        }
 
         @media (min-width: 768px) {
             .navbar-form button[type="submit"] {
-                top: 15%; } }
+                top: 15%;
+            }
+        }
+
         .img img {
             width: 200px;
-            height: 160px; }
-        .t1{
+            height: 160px;
+        }
+
+        .t1 {
             width: 300px;
-            height:120px;
+            height: 120px;
             background: #fff;
-            position:absolute;
-            top:10%;
-            left:25%;
+            position: absolute;
+            top: 10%;
+            left: 25%;
             border-radius: 6%;
             border: #979797;
             z-index: 999;
@@ -123,7 +135,6 @@
     <canvas class="canvas" id="canvas" style="display:block; margin:50px auto;">当前浏览器不支持canvascanvas</canvas>
     <!--<button class="btn btn-success">按钮</button>-->
 </div>
-
 <!--弹出框-->
 <div class="t1">
     <div class="modal-header bg-info" style="font-size: 12px;">
@@ -133,34 +144,36 @@
 
     </div>
 </div>
+
 </body>
 <script src="js/beijing.js"></script>
 <script src="js/lang.js"></script>
 <!--<script src="js/huiTaiLang.js"></script>-->
 <script>
     $(function () {
-        var storage=window.localStorage;
-        // $(".t1").hide();
+        var storage = window.localStorage;
+
         //点击题目
         function examItem() {
-            $('#examItem').on('change', 'input', function() {
+            $('#examItem').on('change', 'input', function () {
 
-                    answer = getItem();
-                    if (answer == $(this).val()) {
-                          $(".tishi").html("第"+itemID+"题回答正确");
-                    } else {
-                        $(".tishi").html("第"+itemID+"题回答错误,正确答案:"+answer);
-                        addWrongItem()
-                    }
+                answer = getItem();
+                if (answer == $(this).val()) {
+                    $(".tishi").html("第" + itemID + "题回答正确");
+                    delWrongItem();
+                } else {
+                    $(".tishi").html("第" + itemID + "题回答错误,正确答案:" + answer);
+                }
 
             })
         }
+
         examItem();
         var pageStart = 0; //题目号
         var pageNum = 0; //重第0行开始查询
         var answer = ""; //答案
         var itemID = 0; //题目id
-        var type=0; //题目类型
+        var type = 0; //题目类型
         var coments = "";//试题内容
         var itemA = "";
         var itemB = "";
@@ -168,12 +181,13 @@
         var itemD = "";
         var img = "";
         var type = 0;
+        var id = 0;
 
-        //保存错题
+        //保存错题 delWrongItem
         function addWrongItem() {
-            if (localStorage.getItem("id") == undefined) {
+            if (storage.getItem("id") == undefined) {
                 // alert("没有用户");
-            }else{
+            } else {
                 $.ajax({
                     url: "/addWrongItem",
                     type: "POST",
@@ -198,19 +212,40 @@
             }
         }
 
+        //删除错题
+        function delWrongItem() {
+            if (localStorage.getItem("id") == undefined) {
+                // alert("没有用户");
+            } else {
+                $.ajax({
+                    url: "/delWrongItem",
+                    type: "POST",
+                    dataType: "json",
+                    data: {
+                        id: id,
+                    },
+                    success: function (res) {
+                    }, error: function () {
+                    }
+
+                });
+            }
+        }
 
         //获取试题
         getItem();
+
         function getItem() {
             $.ajax({
-                url : "practiceAny",
-                async : true,
-                data : {
-                    pageNum:pageNum
+                url: "getWrongItem",
+                async: true,
+                data: {
+                    pageNum: pageNum
                 },
-                type : "POST",
-                dataType : "json",
-                success : function(res) {
+                type: "POST",
+                dataType: "json",
+                success: function (res) {
+                    id = res.id;
                     answer = res.answer;
                     coments = res.coments;
                     itemA = res.itemA;
@@ -222,12 +257,12 @@
                     itemID = pageStart;
                     $(".itemNo").html(pageStart);
                     $(".itemComment").html(res.coments);
-                    if (type==0) {
+                    if (type == 0) {
                         $(".itemA").html("<input type='radio' name='item' value='对' />" + res.itemA);
                         $(".itemB").html("<input type='radio' name='item' value='错' />" + res.itemB);
                         $(".itemC").html("");
                         $(".itemD").html("");
-                    }else{
+                    } else {
                         $(".itemA").html("<input type='radio' name='item' value='A' />" + res.itemA);
                         $(".itemB").html("<input type='radio' name='item' value='C' />" + res.itemB);
                         $(".itemC").html("<input type='radio' name='item' value='C' />" + res.itemC);
@@ -241,11 +276,13 @@
             pageStart = pageStart + 1;
             return answer;
         }
+
         //显示\隐藏题库
         itemdisplay();
+
         function itemdisplay() {
-            if(storage.getItem("type")!=1){
-                $(".itemdisplay").css("display","none");
+            if (storage.getItem("type") != 1) {
+                $(".itemdisplay").css("display", "none");
             }
         }
     })

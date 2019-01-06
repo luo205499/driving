@@ -35,10 +35,8 @@ public class UserController {
 	public User loginTest(String username,String password){
 		User user = userService.loginTest(username,password);
 		if(user!=null){
-			System.out.println("cg");
 			return user;
 		}else{
-			System.out.println("no");
 			return null;
 		}
 	}

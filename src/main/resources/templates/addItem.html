@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="multipart/form-data; charset=utf-8" />
     <title>添加试题</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <script src="js/jquery-3.2.1.js"></script>
@@ -101,7 +102,7 @@
         </div>
         <div class="collapse navbar-collapse" id="response-collapse">
             <ul class="nav navbar-nav" id="nav">
-                <li class="itemdisplay" style="display: block"><a href="#">题库</a></li>
+                <li class="itemdisplay" style="display: block"><a href="#">添加试题</a></li>
                 <li><a href="#" id="mockExam">模拟考试</a></li>
                 <li><a href="#">随机练习</a></li>
                 <li><a href="#">顺序练习</a></li>
@@ -119,96 +120,110 @@
 <!--试题-->
 <div class="container all row">
     <div class="col-md-8 col-sm-6 col-xs-6  examleft">
-        <div class="listExam">
+        <p></p>
+        <button class="btn btn-warning" id="panduan">点击添加选择题</button>
+
+        <form enctype="multipart/form-data" id="form1" method="post" action="/addItem" class="listExam form1">
             <div class="form-group col-md-4">
                 <label for="coments">试题内容：
-                    <textarea rows="4" cols="30" style=" background-color: rgba(15, 15, 15, 0.7);color:whitesmoke;" name="coments" class="form-control" id="coments"></textarea></label>
+                    <textarea rows="4" required cols="30" style=" background-color: rgba(15, 15, 15, 0.7);color:whitesmoke;" name="coments" class="form-control" id="coments"></textarea></label>
             </div>
             <div class="form-group col-md-4">
                 <label for="itemA">A选项：
-                    <input type="text" name="itemA" class="form-control" id="itemA"></label>
+                    <input type="text" required name="itemA" value="A:" class="form-control" id="itemA"></label>
             </div>
             <div class="form-group col-md-4">
                 <label for="itemB">B选项：
-                    <input type="text" name="itemB" class="form-control" id="itemB"></label>
+                    <input type="text" required name="itemB" value="B:" class="form-control" id="itemB"></label>
             </div>
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-4 yin hidden">
                 <label for="itemC">C选项：
-                    <input type="text" name="itemC" class="form-control" id="itemC"></label>
+                    <input type="text" name="itemC" value="C:" class="form-control" id="itemC"></label>
             </div>
-            <div class="form-group col-md-4">
+            <div class="form-group yin col-md-4 hidden">
                 <label for="itemD">D选项：
-                    <input type="text" name="itemD" class="form-control" id="itemD"></label>
+                    <input type="text" name="itemD" value="D:" class="form-control" id="itemD"></label>
             </div>
             <div class="form-group col-md-4">
-                <label for="ansewr">答案：
-                    <input type="text" name="ansewr" class="form-control" id="ansewr"></label>
+                <label for="answer">答案：
+                    <!--<input type="text" name="answer" class="form-control" id="answer">-->
+                    <select id="answer" name="answer" class="btn answer" style="background-color: #14191C;font-size: 16px">
+                        <option value ="">选择答案</option>
+                        <option value ="对" id="dui">对</option>
+                        <option value ="错" id="cuo">错</option>
+                        <option value ="A" id="A" class="hidden">A</option>
+                        <option value ="B" id="B" class="hidden">B</option>
+                        <option value ="C" id="C" class="hidden">C</option>
+                        <option value ="D" id="D" class="hidden">D</option>
+                    </select>
+                </label>
             </div>
             <div class="form-group col-md-4">
                  <span class="fileinput-button">
                     添加图片:</p>
-                     <input type="file">
+                     <input type="file" id="img" name="img2">
                 </span>
             </div>
-            <div class="form-group col-md-4">
-                试题类型:</p>
-                <select id="type" class="btn type" style="background-color: #14191C;font-size: 16px">
+            <div class="form-group col-md-4 hidden">
+              <!--  试题类型:</p>
+                <select id="type" name="type" class="btn type" style="background-color: #14191C;font-size: 16px">
                     <option value ="0">判断题</option>
                     <option value ="1">选择题</option>
-                </select>
+                </select>-->
+                <input type="text" id="type" name="type">
             </div>
             <p></p>
             <div class="form-group text-center ">
 
-                <input type="button" name="" id="addItem" class="btn btn-block" value="提交">
+                <input type="submit" name="" id="addItem" class="btn btn-block" value="提交">
             </div>
-        </div>
+        </form>
     </div>
     <canvas class="canvas" id="canvas" style="display:block; margin:50px auto;">当前浏览器不支持canvascanvas</canvas>
 </div>
-<div class="time">
-    <script type="text/javascript" src="js/clock.js"></script></div>
 </body>
 <!--<script src="js/clock.js"></script>-->
-<script src="js/clock.swf"></script>
 <script src="js/beijing.js"></script>
 <script src="js/lang.js"></script>
 <!--<script src="js/huiTaiLang.js"></script>-->
 <script>
     $(function () {
         var storage=window.localStorage;
+        var result=true;
 
-        //添加试题
-        $("#addItem").on("click", function () {
-            $.ajax({
-                url: "/addItem" ,//url
-                type: "POST",//方法类型
-                dataType: "json",//预期服务器返回的数据类型
-                data: {
-                    coments:$("#coments").val(),
-                    itemA:$("#itemA").val(),
-                    itemB:$("#itemB").val(),
-                    itemC:$("#itemC").val(),
-                    itemD:$("#itemD").val(),
-                    answer:$("#answer").val(),
-                    img:$("#img").val(),
-                    type:$("#type").val()
-                },
-                success: function (res) {
-                    alert("成功！");
-                },
-                error : function() {
-                    alert("失败！");
-                }
-            });
-        });
         //显示\隐藏题库
         itemdisplay();
         function itemdisplay() {
-            if(storage.getItem("type")!=1){
+            if(localStorage.getItem("type")!=1){
                 $(".itemdisplay").css("display","none");
             }
         }
+        $("#panduan").on("click",function () {
+            if(result){
+                $(this).text("点击添加判断题");
+                $(".yin").removeClass("hidden");
+                $("#type").val(1);
+                $("#dui").addClass("hidden");
+                $("#cuo").addClass("hidden");
+                $("#A").removeClass("hidden");
+                $("#B").removeClass("hidden");
+                $("#C").removeClass("hidden");
+                $("#D").removeClass("hidden");
+                result=false;
+            }
+           else {
+                $(this).text("点击添加选择题");
+                $("#dui").removeClass("hidden");
+                $("#cuo").removeClass("hidden");
+                $(".yin").addClass("hidden");
+                $("#A").addClass("hidden");
+                $("#B").addClass("hidden");
+                $("#C").addClass("hidden");
+                $("#D").addClass("hidden");
+                $("#type").val(0);
+                result=true;
+            }
+        })
     })
 </script>
 </html>

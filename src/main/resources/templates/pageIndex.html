@@ -5,31 +5,112 @@
     <title>主页</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/index.css" rel="stylesheet">
+    <link href="icon/iconfont.css" rel="stylesheet">
     <script src="js/jquery-3.2.1.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/index.js"></script>
+    <!--<script src="js/beijing.js"></script>-->
     <style>
         .navbar-inverse input[type="text"] {
             background: #313131;
             border: none;
-            color: #999; }
+            color: #f4f4f4;
+        }
 
         .navbar-inverse .navbar-form {
-            position: relative; }
+            position: relative;
+        }
 
         .navbar-form button[type="submit"] {
             background: #313131;
             border: none;
-            color: #999;
+            color: #a6a6a6;
             position: absolute;
             top: 28%;
-            right: 8%; }
+            right: 8%;
+        }
 
         @media (min-width: 768px) {
             .navbar-form button[type="submit"] {
-                top: 15%; } }
+                top: 15%;
+            }
+        }
+
         .item img {
-            width: 100%; }
+            width: 100%;
+        }
+
+        a:focus {
+            text-decoration: none
+        }
+
+        a:hover {
+            text-decoration: none;
+        }
+
+        .iconfont {
+            color: #202e43;
+        }
+
+        .iconfont:hover {
+            color: #0e161d;
+        }
+
+        .coments {
+            /*width: 100%;*/
+            min-width: 1340px;
+            position: relative;
+            /*background: #0d0d0d;*/
+        }
+        .coment{
+            margin: 0 auto;
+        }
+        .ulKaoShi {
+            margin-top: 80px;
+        }
+
+        .ulFooter li {
+            width: 80px;
+            float: left;
+        }
+        .ulSkills span{
+          /*font-size: 20px;*/
+            /*font-weight: bold;*/
+        }
+        .ulKaoShi2{
+            border: solid 1px rgba(170, 175, 191, 0.82);
+            width: 310px;
+          position: relative;
+            right: -100px;
+            height: 200px;
+        }
+         .ulKaoShi2 a{
+            color: #5f5f5f;
+            font-size: 14px;
+        }
+        .lunbo{
+            min-width: 1340px;
+        }
+        .erji{
+            display: none;
+            position: absolute;
+            width: 100%;
+            color: white;
+            text-align: center;
+        }
+        .erji>li{
+            background: #1d1d1d;
+            border-bottom: 1px solid #4f4f4f;
+        }
+        .erji>li>a{
+            width: 90%;
+            margin-right: auto;
+            margin-left: auto;
+            height: 31px;
+            height: 30px;
+            line-height: 30px;
+            color: #f3f3f3
+        }
     </style>
 </head>
 <body>
@@ -42,12 +123,17 @@
                 <span class="icon-bar"></span> <span class="icon-bar"></span> <span
                     class="icon-bar"></span>
             </button>
-            <a href="backHome" class="navbar-brand"><strong>毕业设计</strong></a>
+            <a href="backHome" class="navbar-brand"><strong>BY一考通</strong></a>
         </div>
         <div class="collapse navbar-collapse" id="response-collapse">
-            <ul class="nav navbar-nav" id="nav">
-                <li class="itemdisplay" style="display: none"><a href="toaddItem">题库</a></li>
-                <li><a href="mockExam" id="mockExam">模拟考试</a></li>
+            <ul class="nav navbar-nav ulDaoHang" id="nav">
+                <li class="itemdisplay" style="display: none"><a href="toaddItem">添加试题</a></li>
+                <li><a href="#" id="mockExam">模拟考试</a>
+                <ul class="erji list-unstyled" id="erji">
+                    <li><a href="mockExam">科目一</a></li>
+                    <li><a href="mockExam4">科目四</a></li>
+                </ul>
+                </li>
                 <li><a href="practice">随机练习</a></li>
                 <li><a href="practice2">顺序练习</a></li>
                 <li><a href="#">联系我们</a></li>
@@ -72,7 +158,7 @@
     </div>
 </nav>
 <!--轮播-->
-<div class="carousel slide" data-ride="carousel" data-interval="5000"
+<div class="carousel lunbo slide" data-ride="carousel" data-interval="5000"
      data-pause="false" id="slideshow">
     <ol class="carousel-indicators">
         <li data-target="#slideshow" data-slide-to="0" class="active"></li>
@@ -86,8 +172,10 @@
         <div class="item active">
             <img src="images/lunbo1.png" alt="">
             <div class="carousel-caption">
-                <h2>我的毕业设计</h2>
-                <p>当你想要放弃的时候，想想当初为什么坚持到这儿！</p>
+                <h2>罚款20-200元：</h2>
+                <p>违规停车不在现场的；</p>
+                <p>未放置保险标志的。</p>
+                <p>违规停车在现场但拒绝驶离的；</p>
             </div>
         </div>
         <div class="item">
@@ -133,7 +221,161 @@
     <span class="glyphicon glyphicon-chevron-right"></span>
 </a>
 </div>
-<!--//登录-->
+<!--coments-->
+<div class="coments">
+    <div class="coment">
+        <div class="container text-center">
+            <h3 style="color: #1f1f1f;margin-bottom: 20px;">重庆2019小车理论考试</h3>
+        </div>
+        <div class="ulSkills container row" style="margin-top: 50px;margin-left: 20px;">
+            <span class="list-group-item-heading col-md-6" style=" font-size: 20px;
+            font-weight: bold;">考试技巧</span>
+            <ul class="list-group list-unstyled col-md-8 col-sm-12 ">
+                <li class="list-group-item">答题中所有题原则——“安全”，所以怎么做安全就怎么做；</li>
+                <li class="list-group-item">遇到紧急情况所有过激的行为都错的，比如急踩（用力踏）油门（制动），急转方向，类似的答案都错；</li>
+                <li class="list-group-item"> 能让行的都让行，能帮助的都帮助，能避让就避让，不抢、不急都是对；</li>
+                <li class="list-group-item">抢救伤员原则先救人，救人原则先止血；</li>
+                <li class="list-group-item">无标志无灯无警路口，优先通过顺序为直-左-右，避让反之；</li>
+                <li class="list-group-item">车辆变换位置都要开转向灯，唯一一个不开的就是进环岛（转盘），出环岛也需要打灯；</li>
+                <li class="list-group-item">红色是禁令（禁止）、黄色是警告、蓝色是指示，三种颜色都没有是辅助；</li>
+                <li class="list-group-item">禁令对禁止、警告对警告、指示对指示，相同就对，不相同就错。</li>
+                <li class="list-group-item">远光灯、近光灯的考题只能使用近光灯，不准使用远光灯。</li>
+                <li class="list-group-item">黄灯亮与黄灯闪烁只一字之差，“闪烁”确保安全，“亮”不准通行，但如果已越线的可通行。</li>
+            </ul>
+
+                <div class=" col-md-4 ulKaoShi2" style="line-height: 50px;">
+
+                    <b class="" style="font-size: 20px;text-align: center">重庆2019小车理论考试科目一</b><br>
+                    <a class="" style="line-height: 40px;text-align: center;width: 130px;height: 40px;background: rgba(221,205,226,0.22);margin-left: 20px">
+                        <a href="#">
+                        <span class="icon iconfont icon-zaixiankaoshi" style="font-size: 25px;position: absolute;top: 50px;left:28px"></span>
+                        <span style="margin-left: 30px;">
+                            <a href="practice2">顺讯练习</a>
+                        </span>
+                        </a>
+                    </a>
+                    <a class="" style="line-height: 30px;text-align: center;width: 130px;height: 40px;background: rgba(221,205,226,0.22);margin-left: 20px">
+                        <a href="#">
+                            <span class="icon iconfont icon-kaoshi1" style="font-size: 30px;position: absolute;top: 50px;left:150px"></span>
+                            <span style="margin-left: 40px;">
+                             <a href="practice">随机练习</a>
+                        </span>
+                        </a>
+                    </a>
+                    <br>
+                    <span class="wrongItem" style=";text-align: center;width: 100px;height: 30px;margin-left: 20px">
+                        <a href="#">
+                            <span class="icon iconfont icon-tubiaozhizuomoban" style="font-size: 30px;position: absolute;top: 103px;left:28px"></span>
+                            <span style="margin-left: 30px;">
+                             <a href="toWrongPractice">错题练习</a>
+                        </span>
+                        </a>
+                    </span>
+                    <br>
+                    <button class="btn btn-group btn-info list-group-item-info list-group-item" style="text-align: center;">
+                        <a href="mockExam">模拟考试</a></button>
+                </div>
+            <div class=" col-md-4 ulKaoShi2" style="line-height: 50px;margin-top: 10px">
+                <b class="" style="font-size: 20px;text-align: center">重庆2019小车理论考试科目四</b><br>
+                <a class="" style="line-height: 40px;text-align: center;width: 130px;height: 40px;background: rgba(221,205,226,0.22);margin-left: 20px">
+                    <a href="#">
+                        <span class="icon iconfont icon-zaixiankaoshi" style="font-size: 25px;position: absolute;top: 50px;left:28px"></span>
+                        <span style="margin-left: 30px;">
+                             <a href="practice2">顺讯练习</a>
+                        </span>
+                    </a>
+                </a>
+                <a class="" style="line-height: 30px;text-align: center;width: 130px;height: 40px;background: rgba(221,205,226,0.22);margin-left: 20px">
+                    <a href="#">
+                        <span class="icon iconfont icon-kaoshi1" style="font-size: 30px;position: absolute;top: 50px;left:150px"></span>
+                        <span style="margin-left: 40px;">
+                             <a href="practice">随机练习</a>
+                        </span>
+                    </a>
+                </a>
+                <span class="wrongItem" style=";text-align: center;width: 130px;height: 40px;background: rgba(221,205,226,0.22);margin-left: 20px">
+                    <a href="#">
+                        <span class="icon iconfont icon-tubiaozhizuomoban" style="font-size: 30px;position: absolute;top: 103px;left:28px"></span>
+                        <span style="margin-left: 30px;">
+                             <a href="toWrongPractice">错题练习</a>
+                        </span>
+                    </a>
+                </span>
+                <br>
+                <button class="btn btn-group btn-info list-group-item-info list-group-item" style="text-align: center;">
+                    <a href="mockExam4">模拟考试</a></button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--botter-->
+<footer>
+    <div class="footer_content">
+        <div class="top">
+            <div class="d1">
+                <div class="d1_1">
+                    <span class="span1">关于</span>
+                    <span class="span2">BY一考通</span>
+                    <span class="span3">About swallow</span>
+                    <a href=""> <span class="span4">MORE>></span></a>
+                </div>
+                <div class="d1_2">
+                    <sapn>BY一考通是本人的毕业设计。该项目为用户提供免费的驾驶员理论模拟考试，
+                        用户注册登录后进行考试可以记录考试信息，查看考试成绩、次数、过关率等。
+                    </sapn>
+                    <div class="over">
+                        <span class="span1">地址：重庆市渝北区郑家院子香奈公馆</span><br>
+                        <span class="span2">Emal:www.xxxx@.163.com   <br>  联系电话：0371-10000000 <br> 版权信息：版权归本人</span>
+                    </div>
+                </div>
+
+            </div>
+            <div class="d2">
+                <div class="d2_1">
+                    <span class="span1">我们</span>
+                    <span class="span2">的团队</span>
+                    <span class="span3">Our team</span>
+                    <a href=""> <span class="span4">MORE>></span></a>
+                </div>
+                <div class="d2_2">
+                    <img src="images/booter_team.png" alt="">
+                </div>
+            </div>
+            <div class="d3">
+                <div class="d3_1">
+                    <span class="span1">快捷</span>
+                    <span class="span2">入口</span>
+                    <a href=""> <span class="span4">MORE>></span></a>
+                </div>
+                <ul class="d3_ul">
+                    <a href="#">
+                        <li>关于我们 ABOUT</li>
+                    </a>
+                    <a href="#">
+                        <li>顾客分享 SHOWLOVE</li>
+                    </a>
+                    <a href="#">
+                        <li>招贤纳士 CAREERS</li>
+                    </a>
+                    <a href="#">
+                        <li>教练陪练 PHOTOli</li>
+                    </a>
+                    <a href="#">
+                        <li>知名驾校 W.P.T.</li>
+                    </a>
+                    <a href="#">
+                        <li>传媒合作 MEDIA</li>
+                    </a>
+                    <a href="#">
+                        <li>加入我们 WEDDING</li>
+                    </a>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!--登录-->
 <div class="modal fade login-modal" id="login-modal" tabindex="-1">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
@@ -163,7 +405,7 @@
                                                                                    style="padding-left: 22px"></label>
                     </div>
                     <div class="modal-footer">
-                        <input type="submit" class="btn btn-group-xs" id="userLogin" value="login">
+                        <input type="submit" class="btn btn-group-xs" id="userLogin" style="color: white" value="登录">
                         <!--<button onclick="loginUser()" class="btn btn-group-xs">login</button>-->
                     </div>
                 </div>
@@ -172,7 +414,7 @@
     </div>
 </div>
 
-<!--//注册-->
+<!--注册-->
 <div class="modal fade login-modal" id="register-modal" tabindex="-1">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
@@ -200,7 +442,7 @@
                                    style="padding-left: 22px"></label>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-group-xs" id="userRegister">注册</button>
+                        <button type="submit" class="btn btn-group-xs" style="color: white" id="userRegister">注册</button>
                     </div>
                 </div>
             </div>
@@ -210,22 +452,39 @@
 </body>
 <script type="text/javascript">
     $(function () {
+        //显示二级菜单
+        $(".ulDaoHang>li").hover( function () {
+                // $("#erji").show();
+                $(this).has("ul").children("ul").fadeIn();
+            }
+            ,function () {
+                // $("#erji").hide();
+                $(this).has("ul").children("ul").fadeOut();
+            })
+        $(".erji>li").hover(function () {
+            $(this).css("background","#000");
+        },function () {
+            $(this).css("background","#1d1d1d");
+        })
 
+        //用户未登录，隐藏错题
+        $(".wrongItem").hide();
         //申明localstorage
-        var storage=window.localStorage;
+        var storage = window.localStorage;
         //从localstorage获得用户信息
         $(".usernamedisplay").text(storage.getItem("username"));
         //刷新当前用户
         setInterval(function () {
             displayuser();
-        },1000);
+        }, 1000);
 
         //登陆成功后隐藏登录注册按钮
         function displayuser() {
             a = $(".usernamedisplay").text();
-            if (a!="") {
-               /* $(".displaylogin").css('display', 'none');
-                $(".nowuser").css('display', 'block');*/
+            if (a != "") {
+                /* $(".displaylogin").css('display', 'none');
+                 $(".nowuser").css('display', 'block');*/
+                $(".wrongItem").fadeIn(1000);
                 $(".displaylogin").fadeOut(1000);
                 $(".nowuser").fadeIn(2000);
             }
@@ -234,43 +493,43 @@
         //登录
         $("#userLogin").on("click", function () {
             $.ajax({
-                url: "/login" ,//url
+                url: "/login",//url
                 type: "POST",//方法类型
                 dataType: "json",//预期服务器返回的数据类型
-                data: {username:$("#username").val(),password:$("#password").val()},
+                data: {username: $("#username").val(), password: $("#password").val()},
                 success: function (res) {
-                    storage.setItem("username",res.username);
-                    storage.setItem("id",res.id);
-                    storage.setItem("type",res.type);
+                    storage.setItem("username", res.username);
+                    storage.setItem("id", res.id);
+                    storage.setItem("type", res.type);
                     window.location.reload(); //刷新当前页面
                 },
-                error : function() {
+                error: function () {
                     alert("登录失败！");
                 }
             });
         });
 
         //注册
-        $("#userRegister").on("click",function () {
+        $("#userRegister").on("click", function () {
             $.ajax({
-                url:"/register",
-                type:"POST",
-                dataType:"json",
-                data: {username:$("#rusername").val(),password:$("#rpassword").val()},
-                success :function(res) {
+                url: "/register",
+                type: "POST",
+                dataType: "json",
+                data: {username: $("#rusername").val(), password: $("#rpassword").val()},
+                success: function (res) {
                     alert("注册成功");
-                    storage.setItem("username",res.username);
-                    storage.setItem("id",res.id);
-                    storage.setItem("type",res.type);
+                    storage.setItem("username", res.username);
+                    storage.setItem("id", res.id);
+                    storage.setItem("type", res.type);
                     window.location.reload(); //刷新当前页面
-                },error : function() {
+                }, error: function () {
                     alert("注册失败！");
                 }
 
             });
         });
         //退出登录
-        $("#loginOut").on("click",function () {
+        $("#loginOut").on("click", function () {
             localStorage.removeItem("username");
             localStorage.removeItem("id");
             localStorage.removeItem("type");
@@ -278,8 +537,9 @@
         });
         //显示\隐藏题库
         itemdisplay();
+
         function itemdisplay() {
-            if(storage.getItem("type")==1){
+            if (storage.getItem("type") == 1) {
                 $(".itemdisplay").fadeIn(2000);
             }
         }

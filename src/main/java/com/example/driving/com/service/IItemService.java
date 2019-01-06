@@ -6,7 +6,7 @@ import com.example.driving.com.entity.Item;
 public interface IItemService {
 
 	/**
-	 * 获取模拟考试题目
+	 * 获取模拟考试科目一题目
 	* 
 	* @author Lcl
 	* @param @param pageNum
@@ -16,6 +16,18 @@ public interface IItemService {
 	* @date 2018年12月16日 下午12:44:59
 	 */
 	 Item getItem(int pageNum);
+
+	/**
+	 * 获取模拟考试科目四题目
+	 *
+	 * @author Lcl
+	 * @param @param pageNum
+	 * @param @return    参数
+	 * @return Item    返回类型
+	 * @throws
+	 * @date 2018年12月16日 下午12:44:59
+	 */
+	Item getItem4(int pageNum);
 
 	/**
 	 * 随机练习

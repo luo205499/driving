@@ -14,6 +14,9 @@ import java.io.FileOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 public class FileUtil {
     //静态方法：三个参数：文件的二进制，文件路径，文件名
@@ -24,7 +27,6 @@ public class FileUtil {
         if(targetfile.exists()) {
             targetfile.mkdirs();
         }
-
         //二进制流写入
         FileOutputStream out = new FileOutputStream(filePath+fileName);
         out.write(file);

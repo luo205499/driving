@@ -36,6 +36,7 @@
             margin-top: 20px;
         }
 
+
         html, body {
             margin: 0;
             background: #14191C;
@@ -63,16 +64,13 @@
             /*margin-right: 60px;*/
             padding-left: 60px;
         }
-
         .navbar-inverse input[type="text"] {
             background: #313131;
             border: none;
-            color: #999;
-        }
+            color: #999; }
 
         .navbar-inverse .navbar-form {
-            position: relative;
-        }
+            position: relative; }
 
         .navbar-form button[type="submit"] {
             background: #313131;
@@ -80,75 +78,50 @@
             color: #999;
             position: absolute;
             top: 28%;
-            right: 8%;
-        }
+            right: 8%; }
 
         @media (min-width: 768px) {
             .navbar-form button[type="submit"] {
-                top: 15%;
-            }
-        }
-
+                top: 15%; } }
         .img img {
             width: 200px;
             height: 160px;
         }
 
-        .login-modal {
-            padding-top: 30px;
-        }
 
+        .login-modal {
+            padding-top: 30px; }
         .login-modal .modal-content {
             background-color: rgba(144, 223, 255, 0.15);
-            color: #fefff6;
-        }
-
+            color: #fefff6; }
         .login-modal .modal-content .modal-body input {
             color: white;
-            background: rgba(0, 0, 0, 0.45);
-        }
-
+            background: rgba(0, 0, 0, 0.45); }
         .login-modal .modal-content .modal-header .close {
-            color: #ff110c;
-        }
-
+            color: #ff110c; }
         .login-modal .modal-content .modal-footer {
-            text-align: center;
-        }
-
+            text-align: center; }
         .login-modal .modal-content .modal-footer .btn {
             font-size: 16px;
             background: rgba(0, 0, 0, 0.92);
-            width: 150px;
-        }
+            width: 150px; }
 
         .register-modal {
-            padding-top: 50px;
-        }
-
+            padding-top: 50px; }
         .register-modal .modal-content {
             background-color: rgba(144, 223, 255, 0.15);
-            color: #fefff6;
-        }
-
+            color: #fefff6; }
         .register-modal .modal-content .modal-body input {
             color: white;
-            background: rgba(0, 0, 0, 0.45);
-        }
-
+            background: rgba(0, 0, 0, 0.45); }
         .register-modal .modal-content .modal-header .close {
-            color: #ff110c;
-        }
-
+            color: #ff110c; }
         .register-modal .modal-content .modal-footer {
-            text-align: center;
-        }
-
+            text-align: center; }
         .register-modal .modal-content .modal-footer .btn {
             font-size: 16px;
             background: rgba(0, 0, 0, 0.92);
-            width: 150px;
-        }
+            width: 150px; }
 
 
     </style>
@@ -303,18 +276,18 @@
     //刷新提示
        function RunOnBeforeUnload() {window.onbeforeunload = function(){ return '将丢失未保存的数据!'; } }
     //申明localstorage
-    var storage = window.localStorage;
+    var storage=window.localStorage;
     //从localstorage获得用户信息
     $(".usernamedisplay").text(storage.getItem("username"));
     //刷新当前用户
     setInterval(function () {
         displayuser();
-    }, 1000);
+    },1000);
 
     //登陆成功后隐藏登录注册按钮
     function displayuser() {
         a = $(".usernamedisplay").text();
-        if (a != "") {
+        if (a!="") {
             $(".displaylogin").css('display', 'none');
             $(".nowuser").css('display', 'block');
         }
@@ -323,43 +296,43 @@
     //登录
     $("#userLogin").on("click", function () {
         $.ajax({
-            url: "/login",//url
+            url: "/login" ,//url
             type: "POST",//方法类型
             dataType: "json",//预期服务器返回的数据类型
-            data: {username: $("#username").val(), password: $("#password").val()},
+            data: {username:$("#username").val(),password:$("#password").val()},
             success: function (res) {
-                storage.setItem("username", res.username);
-                storage.setItem("id", res.id);
-                storage.setItem("type", res.type);
+                storage.setItem("username",res.username);
+                storage.setItem("id",res.id);
+                storage.setItem("type",res.type);
                 window.location.reload(); //刷新当前页面
             },
-            error: function () {
+            error : function() {
                 alert("登录失败！");
             }
         });
     });
 
     //注册
-    $("#userRegister").on("click", function () {
+    $("#userRegister").on("click",function () {
         $.ajax({
-            url: "/register",
-            type: "POST",
-            dataType: "json",
-            data: {username: $("#rusername").val(), password: $("#rpassword").val()},
-            success: function (res) {
+            url:"/register",
+            type:"POST",
+            dataType:"json",
+            data: {username:$("#rusername").val(),password:$("#rpassword").val()},
+            success :function(res) {
                 alert("注册成功");
-                storage.setItem("username", res.username);
-                storage.setItem("id", res.id);
-                storage.setItem("type", res.type);
+                storage.setItem("username",res.username);
+                storage.setItem("id",res.id);
+                storage.setItem("type",res.type);
                 window.location.reload(); //刷新当前页面
-            }, error: function () {
+            },error : function() {
                 alert("注册失败！");
             }
 
         });
     });
     //退出登录
-    $("#loginOut").on("click", function () {
+    $("#loginOut").on("click",function () {
         localStorage.removeItem("username");
         localStorage.removeItem("id");
         localStorage.removeItem("type");
@@ -367,10 +340,9 @@
     });
     //显示\隐藏题库
     itemdisplay();
-
     function itemdisplay() {
-        if (storage.getItem("type") != 1) {
-            $(".itemdisplay").css("display", "none");
+        if(storage.getItem("type")!=1){
+            $(".itemdisplay").css("display","none");
         }
     }
 
@@ -386,7 +358,7 @@
 
     //执行函数部分
     countFunc(chazhi);
-    setTimer = setInterval(function () {
+    setTimer = setInterval(function() {
         chazhi = chazhi - 1000;
         countFunc(chazhi);
     }, 1000);
@@ -422,13 +394,13 @@
     }
 
 
-    //生成答案表格
+//生成答案表格
     function addTable() {
         var html = "";
-        for (var i = 1, j = i + 1, k = j + 1, l = k + 1, a = l + 1; i <= 100; i += 5, j = i + 1, k = j + 1, l = k + 1, a = l + 1) {
+        for (var p = 1, j = p + 1, k = j + 1, l = k + 1, a = l + 1; p <= 50; p += 5, j = p + 1, k = j + 1, l = k + 1, a = l + 1) {
 
             html += "<tr>";
-            html += "<td id='" + i + "'>" + i + "</td>";
+            html += "<td id='" + p + "'>" + p + "</td>";
             html += "<td id='" + j + "'>" + j + "</td>";
             html += "<td id='" + k + "'>" + k + "</td>";
             html += "<td id='" + l + "'>" + l + "</td>";
@@ -438,28 +410,26 @@
         }
         $("#J_TbData").html(html);
     }
-
     addTable();
 
 
-    $(function () {
+    $(function() {
 
         //定时器，结束考试
         setTimeout(function () {
-                stopExam();//结束考试
-                addExam();//如果用户登录，将考试信息插入数据库
-            },
+            stopExam();//结束考试
+            addExam();//如果用户登录，将考试信息插入数据库
+        },
             // 15880
             2699600
         );
-
         //点击题目
         function examItem() {
-            $('#examItem').on('change', 'input', function () {
+            $('#examItem').on('change', 'input', function() {
 
-                if (pageNum >= 100) {
-                    $(".listExam").html("本次考试得分：" + grade);
-                    $(".listExam").css("color", "#fff");
+                if (pageNum >= 50) {
+                    $(".listExam").html("本次考试得分："+grade);
+                    $(".listExam").css("color","#fff");
                     alert("完成考试");
                     addExam();
                     answer = getItem();
@@ -467,16 +437,16 @@
                     if (answer == $(this).val()) {
                         /* console.log("选择答案"+$(this).val()) */
                         /*  alert("第"+itemID+"题回答正确"); */
-                        grade = grade + 1;
+                        grade = grade + 2;
                         $('#' + itemID).css({
-                            'background': '#1fd32f',
-                            'color': '#ffffff'
+                            'background' : '#1fd32f',
+                            'color' : '#ffffff'
                         });
                     } else {
                         /* alert("回答错误"); */
                         $('#' + itemID).css({
-                            'background': '#d30800',
-                            'color': '#ffffff'
+                            'background' : '#d30800',
+                            'color' : '#ffffff'
                         });
                         addWrongItem();
                     }
@@ -486,25 +456,23 @@
                     if (answer == $(this).val()) {
                         /* console.log("选择答案"+$(this).val()) */
                         /*  alert("第"+itemID+"题回答正确"); */
-                        grade = grade + 1;
+                        grade = grade + 2;
                         $('#' + itemID).css({
-                            'background': '#1fd32f',
-                            'color': '#ffffff'
+                            'background' : '#1fd32f',
+                            'color' : '#ffffff'
                         });
                     } else {
                         /* alert("回答错误"); */
                         $('#' + itemID).css({
-                            'background': '#d30800',
-                            'color': '#ffffff'
+                            'background' : '#d30800',
+                            'color' : '#ffffff'
                         });
                         addWrongItem();
-
                     }
                 }
 
             })
         }
-
         examItem();
 
         var pageStart = 0; //题目号
@@ -525,27 +493,27 @@
             if (localStorage.getItem("id") == undefined) {
                 // alert("没有用户");
             }else{
-            $.ajax({
-                url: "/addWrongItem",
-                type: "POST",
-                dataType: "json",
-                data: {
-                    uid: localStorage.getItem("id"),
-                    answer: answer, //答案
-                    coments: coments,//试题内容
-                    itemA: itemA,
-                    itemB: itemB,
-                    itemC: itemC,
-                    itemD: itemD,
-                    img: img,
-                    type: type
+                $.ajax({
+                    url: "/addWrongItem",
+                    type: "POST",
+                    dataType: "json",
+                    data: {
+                        uid: localStorage.getItem("id"),
+                        answer: answer, //答案
+                        coments: coments,//试题内容
+                        itemA: itemA,
+                        itemB: itemB,
+                        itemC: itemC,
+                        itemD: itemD,
+                        img: img,
+                        type: type
 
-                },
-                success: function (res) {
-                }, error: function () {
-                }
+                    },
+                    success: function (res) {
+                    }, error: function () {
+                    }
 
-            });
+                });
             }
         }
 
@@ -553,23 +521,25 @@
         //获取试题
         function getItem() {
             $.ajax({
-                url: "getitem",
-                async: true,
-                data: {
-                    pageNum: pageNum
+                url : "getitem4",
+                async : true,
+                data : {
+                    pageNum:pageNum
                 },
-                type: "POST",
-                dataType: "json",
-                success: function (res) {
+                type : "POST",
+                dataType : "json",
+                success : function(res) {
                     $(".itemNo").html(pageStart);
                     $(".itemComment").html(res.coments);
-                    if (pageStart <= 40) {
+                    if (pageStart <= 20) {
                         $(".itemA").html("<input type='radio' name='item' value='对' />" + res.itemA);
                         $(".itemB").html("<input type='radio' name='item' value='错' />" + res.itemB);
                     }
-                    if (pageStart > 40) {
+                    if (pageStart > 20) {
                         $(".itemA").html("<input type='radio' name='item' value='A' />" + res.itemA);
-                        $(".itemB").html("<input type='radio' name='item' value='B' />" + res.itemB);
+                        $(".itemB").html("<input type='radio' name='item' value='C' />" + res.itemB);
+                    }
+                    if (pageStart > 20) {
                         $(".itemC").html("<input type='radio' name='item' value='C' />" + res.itemC);
                         $(".itemD").html("<input type='radio' name='item' value='D' />" + res.itemD);
                     }
@@ -591,7 +561,6 @@
 
             return answer;
         }
-
         getItem();
 
 
@@ -601,21 +570,20 @@
             $(".listExam").html("本次考试得分：" + grade);
             $(".listExam").css("color", "#fff");
         }
-
         //考试结束生成成绩表
         function addExam() {
-            if (storage.getItem("id") == undefined) {
+            if(storage.getItem("id")==undefined){
                 // alert("没有用户");
             }
-            else {
-                alert("分数" + grade + "用户id" + storage.getItem("id"));
+            else{
+                alert("分数"+grade+"用户id"+storage.getItem("id"));
                 $.ajax({
-                    url: "/addExam",
-                    type: "POST",
-                    dataType: "json",
-                    data: {uid: storage.getItem("id"), grade: grade},
-                    success: function (res) {
-                    }, error: function () {
+                    url:"/addExam",
+                    type:"POST",
+                    dataType:"json",
+                    data: {uid:storage.getItem("id"),grade:grade},
+                    success :function(res) {
+                    },error : function() {
                     }
 
                 });

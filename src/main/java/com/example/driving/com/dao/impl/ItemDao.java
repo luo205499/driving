@@ -25,7 +25,7 @@ public class ItemDao implements IItemDao {
     private JdbcTemplate jdbcTemplate;
 
     /**
-     * 模拟考试
+     * 科目一模拟考试
      * @param pageNum
      * @return
      */
@@ -35,6 +35,28 @@ public class ItemDao implements IItemDao {
         if(pageNum>=40){
             sql="select * from item where type=1";
             pageNum=pageNum-40;
+        }
+        SqlRowSet rs = jdbcTemplate.queryForRowSet(sql);
+        List<Item> itemList=new ArrayList();
+        while (rs.next()) {
+            itemList.add(generateItem(rs));
+        }
+        Random rand=new Random();
+        Collections.shuffle(itemList,rand);
+        Item ite = itemList.get(pageNum);
+        return ite;
+    }
+    /**
+     * 科目四模拟考试
+     * @param pageNum
+     * @return
+     */
+    @Override
+    public Item getItem4(int pageNum) {
+        String sql = "select * from item where type=0";
+        if(pageNum>=20){
+            sql="select * from item where type=1";
+            pageNum=pageNum-20;
         }
         SqlRowSet rs = jdbcTemplate.queryForRowSet(sql);
         List<Item> itemList=new ArrayList();
