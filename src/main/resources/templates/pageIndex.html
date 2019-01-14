@@ -10,6 +10,7 @@
     <script src="js/jquery-3.2.1.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/index.js"></script>
+    <script src="js/plug-in.min.js"></script>
     <!--<script src="js/beijing.js"></script>-->
     <style>
         a:focus {
@@ -431,6 +432,17 @@
             }
         }
 
+
+       /* $.Pop('',{
+            Title:"提示信息",//标题
+            Close:true,//是否显示关闭按钮 true(开)/false(关)
+            Animation:"layerFadeIn",// 默认动画
+            BoxBg:true, // 是否显示遮罩背景层 true(开)/false(关)
+            BoxDrag:true, // 是否可以移动弹出层 true(开)/false(关)
+            BoxBgopacity:0.6, // 遮罩层的透明度 0-1 0完全透明1完全黑暗
+            ZIndex:99999, // 弹出层的cssz-index属性
+            Class:false, // 是否叠加css样式
+        });*/
         //登录
         $("#userLogin").on("click", function () {
             $.ajax({
@@ -442,10 +454,11 @@
                     storage.setItem("username", res.username);
                     storage.setItem("id", res.id);
                     storage.setItem("type", res.type);
-                    window.location.reload(); //刷新当前页面
+                    $.Pop('登录成功！','alert',function(){window.location.reload()})
                 },
                 error: function () {
-                    alert("登录失败！");
+                    // $.Pop('登录失败',{Animation:'slideFromTop',Title:"提示信息"});
+                    $.Pop('<h5>登录失败,请重新登录</h5>','alert',function(){window.location.reload()})
                 }
             });
         });
@@ -458,13 +471,12 @@
                 dataType: "json",
                 data: {username: $("#rusername").val(), password: $("#rpassword").val()},
                 success: function (res) {
-                    alert("注册成功");
                     storage.setItem("username", res.username);
                     storage.setItem("id", res.id);
                     storage.setItem("type", res.type);
-                    window.location.reload(); //刷新当前页面
+                    $.Pop('<h5>注册成功</h5>','alert',function(){window.location.reload()});
                 }, error: function () {
-                    alert("注册失败！");
+                    $.Pop('<h5>注册失败,请重新注册</h5>','alert',function(){window.location.reload()});
                 }
 
             });

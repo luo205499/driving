@@ -114,7 +114,7 @@
         }
     </style>
 </head>
-<body onload="RunOnBeforeUnload()">
+<body>
 <!--导航-->
 <nav class="navbar navbar-inverse navbar-fixed-top navtop">
     <div class="container">
@@ -269,8 +269,6 @@
 </body>
 <script src="js/beijing.js"></script>
 <script>
-    //刷新提示
-    function RunOnBeforeUnload() {window.onbeforeunload = function(){ return '将丢失未保存的数据!'; } }
     $(function () {
         var storage = window.localStorage;
 

@@ -7,10 +7,10 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <script src="js/jquery-3.2.1.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/plug-in.min.js"></script>
     <style>
 
         html, body {
-            overflow: hidden;
             background: #14191C;
             margin: 0;
         }
@@ -98,7 +98,7 @@
         }
     </style>
 </head>
-<body onload="RunOnBeforeUnload()">
+<body>
 <!--导航-->
 <nav class="navbar navbar-inverse navbar-fixed-top navtop">
     <div class="container">
@@ -253,8 +253,6 @@
 </body>
 <script src="js/beijing.js"></script>
 <script>
-    //刷新提示
-    function RunOnBeforeUnload() {window.onbeforeunload = function(){ return '将丢失未保存的数据!'; } }
     $(function () {
         var storage=window.localStorage;
         // $(".t1").hide();
@@ -395,10 +393,10 @@
                     storage.setItem("username", res.username);
                     storage.setItem("id", res.id);
                     storage.setItem("type", res.type);
-                    window.location.reload(); //刷新当前页面
+                    $.Pop('<h5>登录成功</h5>','confirm',function(){window.location.reload()});
                 },
                 error: function () {
-                    alert("登录失败！");
+                    $.Pop('<h5>登录失败,请重新登录</h5>','confirm',function(){window.location.reload()});
                 }
             });
         });
@@ -411,13 +409,12 @@
                 dataType: "json",
                 data: {username: $("#rusername").val(), password: $("#rpassword").val()},
                 success: function (res) {
-                    alert("注册成功");
                     storage.setItem("username", res.username);
                     storage.setItem("id", res.id);
                     storage.setItem("type", res.type);
-                    window.location.reload(); //刷新当前页面
+                    $.Pop('<h5>注册成功</h5>','alert',function(){window.location.reload()});
                 }, error: function () {
-                    alert("注册失败！");
+                    $.Pop('<h5>注册失败,请重新注册</h5>','alert',function(){window.location.reload()});
                 }
 
             });

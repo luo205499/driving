@@ -7,6 +7,7 @@
     <script src="js/jquery-3.2.1.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/beijing.js"></script>
+    <script src="js/plug-in.min.js"></script>
     <style>
         .glyphicon-user {
             position: absolute;
@@ -145,7 +146,7 @@
         }
     </style>
 </head>
-<body onload="RunOnBeforeUnload()">
+<body>
 <!--导航-->
 <nav class="navbar navbar-inverse navbar-fixed-top navtop">
     <div class="container">
@@ -302,7 +303,6 @@
 
 <script type="text/javascript">
     //刷新提示
-       function RunOnBeforeUnload() {window.onbeforeunload = function(){ return '将丢失未保存的数据!'; } }
     //申明localstorage
     var storage=window.localStorage;
     //从localstorage获得用户信息
@@ -332,10 +332,10 @@
                 storage.setItem("username",res.username);
                 storage.setItem("id",res.id);
                 storage.setItem("type",res.type);
-                window.location.reload(); //刷新当前页面
+                $.Pop('<h5>登录成功</h5>','alert',function(){window.location.reload()});
             },
             error : function() {
-                alert("登录失败！");
+                $.Pop('<h5>登录失败,请重新登录</h5>','alert',function(){window.location.reload()});
             }
         });
     });
@@ -348,13 +348,12 @@
             dataType:"json",
             data: {username:$("#rusername").val(),password:$("#rpassword").val()},
             success :function(res) {
-                alert("注册成功");
                 storage.setItem("username",res.username);
                 storage.setItem("id",res.id);
                 storage.setItem("type",res.type);
-                window.location.reload(); //刷新当前页面
+                $.Pop('<h5>注册成功</h5>','alert',function(){window.location.reload()});
             },error : function() {
-                alert("注册失败！");
+                $.Pop('<h5>注册失败，请重新注册</h5>','alert',function(){window.location.reload()});
             }
 
         });
@@ -458,7 +457,8 @@
                 if (pageNum >= 50) {
                     $(".listExam").html("本次考试得分："+grade);
                     $(".listExam").css("color","#fff");
-                    alert("完成考试");
+                    chazhi=0;
+                    $.Pop('完成考试',{Animation:'layer-rollIn',Title:"<b>提示信息</b>"});
                     addExam();
                     answer = getItem();
                     /*  console.log("正确答案"+answer) */
@@ -594,7 +594,7 @@
 
         //时间结束停止答题
         function stopExam() {
-            alert("考试结束");
+            $.Pop('考试结束',{Animation:'layer-rollIn',Title:"<b>提示信息</b>"});
             $(".listExam").html("本次考试得分：" + grade);
             $(".listExam").css("color", "#fff");
         }
@@ -604,7 +604,6 @@
                 // alert("没有用户");
             }
             else{
-                alert("分数"+grade+"用户id"+storage.getItem("id"));
                 $.ajax({
                     url:"/addExam",
                     type:"POST",
