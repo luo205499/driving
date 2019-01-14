@@ -20,8 +20,8 @@ public class ExamController {
     private IExamService examService;
     @RequestMapping("addExam")
     @ResponseBody
-    public int addExam(int uid, int grade) {
-        return examService.addExam(uid,grade);
+    public int addExam(int uid, int grade,int type) {
+        return examService.addExam(uid,grade,type);
     }
 
 }

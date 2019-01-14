@@ -68,9 +68,26 @@ public class UserDao implements IUserDao {
      * @return
      */
     @Override
-    public List queryUser(int id) {
-        String sql = "select e.id,e.grade,e.examTime from user as u,exam as e where u.id=e.u_id and u.id=?";
-        SqlRowSet rs = jdbcTemplate.queryForRowSet(sql,id);
+    public List queryUser(int id,int pageNo,int pageSize) {
+        String sql = "select e.id,e.grade,e.type,e.examTime from user as u,exam as e where u.id=e.u_id and u.id=? limit ?,?";
+//        SqlRowSet rs = jdbcTemplate.queryForRowSet(sql,id,pageNo,pageSize);
+        List<Map<String,Object>> list = jdbcTemplate.queryForList(sql,id,pageNo,pageSize);
+        if(list==null){
+            return null;
+        }
+        else{
+            return list;
+        }
+    }
+    /**
+     * 查看用户信息
+     * @param id
+     * @return
+     */
+    @Override
+    public List queryUserAll(int id) {
+        String sql = "select e.id,e.grade,e.type,e.examTime from user as u,exam as e where u.id=e.u_id and u.id=?";
+//        SqlRowSet rs = jdbcTemplate.queryForRowSet(sql,id,pageNo,pageSize);
         List<Map<String,Object>> list = jdbcTemplate.queryForList(sql,id);
         if(list==null){
             return null;
@@ -79,7 +96,6 @@ public class UserDao implements IUserDao {
             return list;
         }
     }
-
 
     //保存用户信息
     private User generateEntity(SqlRowSet rs) {

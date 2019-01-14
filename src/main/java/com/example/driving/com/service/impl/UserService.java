@@ -49,8 +49,13 @@ public class UserService implements IUserService {
 	}
 
 	@Override
-	public List queryUser(int id) {
-		return userDao.queryUser(id);
+	public List queryUser(int id,int pageNo,int pageSize) {
+		return userDao.queryUser(id,pageNo,pageSize);
+	}
+
+	@Override
+	public List queryUserAll(int id) {
+		return userDao.queryUserAll(id);
 	}
 
 

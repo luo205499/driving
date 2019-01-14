@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>主页</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/index.css" rel="stylesheet">
     <link href="icon/iconfont.css" rel="stylesheet">
@@ -11,35 +12,6 @@
     <script src="js/index.js"></script>
     <!--<script src="js/beijing.js"></script>-->
     <style>
-        .navbar-inverse input[type="text"] {
-            background: #313131;
-            border: none;
-            color: #f4f4f4;
-        }
-
-        .navbar-inverse .navbar-form {
-            position: relative;
-        }
-
-        .navbar-form button[type="submit"] {
-            background: #313131;
-            border: none;
-            color: #a6a6a6;
-            position: absolute;
-            top: 28%;
-            right: 8%;
-        }
-
-        @media (min-width: 768px) {
-            .navbar-form button[type="submit"] {
-                top: 15%;
-            }
-        }
-
-        .item img {
-            width: 100%;
-        }
-
         a:focus {
             text-decoration: none
         }
@@ -57,93 +29,90 @@
         }
 
         .coments {
-            /*width: 100%;*/
-            min-width: 1340px;
             position: relative;
-            /*background: #0d0d0d;*/
         }
-        .coment{
+
+        .coment {
             margin: 0 auto;
-        }
-        .ulKaoShi {
-            margin-top: 80px;
+            width: 100%;
         }
 
         .ulFooter li {
             width: 80px;
             float: left;
         }
-        .ulSkills span{
-          /*font-size: 20px;*/
-            /*font-weight: bold;*/
-        }
-        .ulKaoShi2{
+
+        .ulKaoShi2 {
             border: solid 1px rgba(170, 175, 191, 0.82);
             width: 310px;
-          position: relative;
-            right: -100px;
+            position: relative;
             height: 200px;
         }
-         .ulKaoShi2 a{
+
+        .ulKaoShi2 a {
             color: #5f5f5f;
             font-size: 14px;
         }
-        .lunbo{
-            min-width: 1340px;
+        .xueChe .iconfont{
+            font-size: 60px;
         }
-        .erji{
-            display: none;
-            position: absolute;
-            width: 100%;
+        .dropdown-menu{
+            margin: 0;
+            padding: 0;
+            border: 1px solid #000;
+            background: #2f2f2f;
+            min-width: 100px;
+            height: 55px;
+        }
+        .dropdown-menu>li{
+            width: 100px;
+            border-radius: 4px;
+        }
+        .dropdown-menu>li a{
+            color: #9a9a98;
+            width: 100px;
+            border-radius: 4px;
+        }
+        .dropdown-menu>li a:hover{
+            background: #000000;
             color: white;
-            text-align: center;
-        }
-        .erji>li{
-            background: #1d1d1d;
-            border-bottom: 1px solid #4f4f4f;
-        }
-        .erji>li>a{
-            width: 90%;
-            margin-right: auto;
-            margin-left: auto;
-            height: 31px;
-            height: 30px;
-            line-height: 30px;
-            color: #f3f3f3
+            border-radius: 4px;
         }
     </style>
 </head>
 <body>
 <!--导航-->
-<nav class="navbar navbar-inverse navbar-fixed-top">
+<nav class="navbar navbar-inverse navbar-fixed-top navtop">
     <div class="container">
         <div class="navbar-header">
             <button class="navbar-toggle" data-toggle="collapse"
                     data-target="#response-collapse">
-                <span class="icon-bar"></span> <span class="icon-bar"></span> <span
-                    class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
             </button>
-            <a href="backHome" class="navbar-brand"><strong>BY一考通</strong></a>
+            <a href="backHome" class="">
+                <!--<strong>BY一考通</strong>-->
+                <img src="images/LOGO_03.png" alt="LOGO" width="100px" style="display: block;line-height:90px;">
+            </a>
         </div>
         <div class="collapse navbar-collapse" id="response-collapse">
             <ul class="nav navbar-nav ulDaoHang" id="nav">
                 <li class="itemdisplay" style="display: none"><a href="toaddItem">添加试题</a></li>
-                <li><a href="#" id="mockExam">模拟考试</a>
-                <ul class="erji list-unstyled" id="erji">
-                    <li><a href="mockExam">科目一</a></li>
-                    <li><a href="mockExam4">科目四</a></li>
-                </ul>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="mockExam">模拟考试
+                        <span class="caret">
+                                </span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="mockExam">科目一</a></li>
+                        <li><a href="mockExam4">科目四</a></li>
+                    </ul>
                 </li>
                 <li><a href="practice">随机练习</a></li>
                 <li><a href="practice2">顺序练习</a></li>
                 <li><a href="#">联系我们</a></li>
             </ul>
-            <form action="" class="navbar-form navbar-left">
-                <input type="text" placeholder="搜索" class="form-control">
-                <button type="submit">
-                    <span class="glyphicon glyphicon-search"></span>
-                </button>
-            </form>
             <div class="profile navbar-right">
                 <ul class="nav navbar-nav">
                     <li class="nowuser" style="display: none;"><a href="#" id="loginOut">退出当前用户:</a></li>
@@ -157,80 +126,16 @@
         </div>
     </div>
 </nav>
-<!--轮播-->
-<div class="carousel lunbo slide" data-ride="carousel" data-interval="5000"
-     data-pause="false" id="slideshow">
-    <ol class="carousel-indicators">
-        <li data-target="#slideshow" data-slide-to="0" class="active"></li>
-        <li data-target="#slideshow" data-slide-to="1"></li>
-        <li data-target="#slideshow" data-slide-to="2"></li>
-        <li data-target="#slideshow" data-slide-to="3"></li>
-        <li data-target="#slideshow" data-slide-to="4"></li>
-        <li data-target="#slideshow" data-slide-to="5"></li>
-    </ol>
-    <div class="carousel-inner">
-        <div class="item active">
-            <img src="images/lunbo1.png" alt="">
-            <div class="carousel-caption">
-                <h2>罚款20-200元：</h2>
-                <p>违规停车不在现场的；</p>
-                <p>未放置保险标志的。</p>
-                <p>违规停车在现场但拒绝驶离的；</p>
-            </div>
-        </div>
-        <div class="item">
-            <img src="images/lunbo2.png" alt="">
-            <div class="carousel-caption">
-                <h2>我的毕业设计</h2>
-                <p>当你想要放弃的时候，想想当初为什么坚持到这儿！</p>
-            </div>
-        </div>
-
-        <div class="item">
-            <img src="images/lunbo3.png" alt="">
-            <div class="carousel-caption">
-                <h2>我的毕业设计</h2>
-                <p>当你想要放弃的时候，想想当初为什么坚持到这儿！</p>
-            </div>
-        </div>
-        <div class="item">
-            <img src="images/lunbo4.png" alt="">
-            <div class="carousel-caption">
-                <h2>我的毕业设计</h2>
-                <p>当你想要放弃的时候，想想当初为什么坚持到这儿！</p>
-            </div>
-        </div>
-        <div class="item">
-            <img src="images/lunbo5.png" alt="">
-            <div class="carousel-caption">
-                <h2>我的毕业设计</h2>
-                <p>当你想要放弃的时候，想想当初为什么坚持到这儿！</p>
-            </div>
-        </div>
-        <div class="item">
-            <img src="images/lunbo6.png" alt="">
-            <div class="carousel-caption">
-                <h2>我的毕业设计</h2>
-                <p>当你想要放弃的时候，想想当初为什么坚持到这儿！</p>
-            </div>
-        </div>
-    </div>
-    <a href="#slideshow" data-slide="prev" class="left carousel-control">
-        <span class="glyphicon glyphicon-chevron-left"></span>
-    </a> <a href="#slideshow" data-slide="next" class="right carousel-control">
-    <span class="glyphicon glyphicon-chevron-right"></span>
-</a>
-</div>
 <!--coments-->
 <div class="coments">
     <div class="coment">
         <div class="container text-center">
-            <h3 style="color: #1f1f1f;margin-bottom: 20px;">重庆2019小车理论考试</h3>
+            <h3 style="color: #1f1f1f;margin-bottom: 20px;margin-top: 70px;">重庆2019小车理论考试</h3>
         </div>
-        <div class="ulSkills container row" style="margin-top: 50px;margin-left: 20px;">
-            <span class="list-group-item-heading col-md-6" style=" font-size: 20px;
+        <div class="ulSkills container row" style="margin-top: 20px;margin-left: 20px;">
+            <span class="list-group-item-heading col-md-6 col-xs-6" style=" font-size: 20px;
             font-weight: bold;">考试技巧</span>
-            <ul class="list-group list-unstyled col-md-8 col-sm-12 ">
+            <ul class="list-group list-unstyled col-md-8 col-xs-12 ">
                 <li class="list-group-item">答题中所有题原则——“安全”，所以怎么做安全就怎么做；</li>
                 <li class="list-group-item">遇到紧急情况所有过激的行为都错的，比如急踩（用力踏）油门（制动），急转方向，类似的答案都错；</li>
                 <li class="list-group-item"> 能让行的都让行，能帮助的都帮助，能避让就避让，不抢、不急都是对；</li>
@@ -243,59 +148,70 @@
                 <li class="list-group-item">黄灯亮与黄灯闪烁只一字之差，“闪烁”确保安全，“亮”不准通行，但如果已越线的可通行。</li>
             </ul>
 
-                <div class=" col-md-4 ulKaoShi2" style="line-height: 50px;">
-
-                    <b class="" style="font-size: 20px;text-align: center">重庆2019小车理论考试科目一</b><br>
-                    <a class="" style="line-height: 40px;text-align: center;width: 130px;height: 40px;background: rgba(221,205,226,0.22);margin-left: 20px">
-                        <a href="#">
-                        <span class="icon iconfont icon-zaixiankaoshi" style="font-size: 25px;position: absolute;top: 50px;left:28px"></span>
-                        <span style="margin-left: 30px;">
-                            <a href="practice2">顺讯练习</a>
-                        </span>
-                        </a>
-                    </a>
-                    <a class="" style="line-height: 30px;text-align: center;width: 130px;height: 40px;background: rgba(221,205,226,0.22);margin-left: 20px">
-                        <a href="#">
-                            <span class="icon iconfont icon-kaoshi1" style="font-size: 30px;position: absolute;top: 50px;left:150px"></span>
-                            <span style="margin-left: 40px;">
-                             <a href="practice">随机练习</a>
-                        </span>
-                        </a>
-                    </a>
-                    <br>
-                    <span class="wrongItem" style=";text-align: center;width: 100px;height: 30px;margin-left: 20px">
-                        <a href="#">
-                            <span class="icon iconfont icon-tubiaozhizuomoban" style="font-size: 30px;position: absolute;top: 103px;left:28px"></span>
-                            <span style="margin-left: 30px;">
-                             <a href="toWrongPractice">错题练习</a>
-                        </span>
-                        </a>
-                    </span>
-                    <br>
-                    <button class="btn btn-group btn-info list-group-item-info list-group-item" style="text-align: center;">
-                        <a href="mockExam">模拟考试</a></button>
-                </div>
-            <div class=" col-md-4 ulKaoShi2" style="line-height: 50px;margin-top: 10px">
-                <b class="" style="font-size: 20px;text-align: center">重庆2019小车理论考试科目四</b><br>
-                <a class="" style="line-height: 40px;text-align: center;width: 130px;height: 40px;background: rgba(221,205,226,0.22);margin-left: 20px">
+            <div class=" col-md-4 col-xs-6 ulKaoShi2" style="line-height: 50px;margin-top: 10px">
+                <b class="" style="font-size: 20px;text-align: center">重庆2019小车理论考试科目一</b><br>
+                <a class=""
+                   style="line-height: 40px;text-align: center;width: 130px;height: 40px;background: rgba(221,205,226,0.22);margin-left: 20px">
                     <a href="#">
-                        <span class="icon iconfont icon-zaixiankaoshi" style="font-size: 25px;position: absolute;top: 50px;left:28px"></span>
+                        <span class="icon iconfont icon-zaixiankaoshi"
+                              style="font-size: 25px;position: absolute;top: 50px;left:28px"></span>
                         <span style="margin-left: 30px;">
                              <a href="practice2">顺讯练习</a>
                         </span>
                     </a>
                 </a>
-                <a class="" style="line-height: 30px;text-align: center;width: 130px;height: 40px;background: rgba(221,205,226,0.22);margin-left: 20px">
+                <a class=""
+                   style="line-height: 30px;text-align: center;width: 130px;height: 40px;background: rgba(221,205,226,0.22);margin-left: 20px">
                     <a href="#">
-                        <span class="icon iconfont icon-kaoshi1" style="font-size: 30px;position: absolute;top: 50px;left:150px"></span>
+                        <span class="icon iconfont icon-kaoshi1"
+                              style="font-size: 30px;position: absolute;top: 50px;left:150px"></span>
                         <span style="margin-left: 40px;">
                              <a href="practice">随机练习</a>
                         </span>
                     </a>
                 </a>
-                <span class="wrongItem" style=";text-align: center;width: 130px;height: 40px;background: rgba(221,205,226,0.22);margin-left: 20px">
+                <span class="wrongItem"
+                      style=";text-align: center;width: 130px;height: 40px;background: rgba(221,205,226,0.22);margin-left: 20px">
                     <a href="#">
-                        <span class="icon iconfont icon-tubiaozhizuomoban" style="font-size: 30px;position: absolute;top: 103px;left:28px"></span>
+                        <span class="icon iconfont icon-tubiaozhizuomoban"
+                              style="font-size: 30px;position: absolute;top: 103px;left:28px"></span>
+                        <span style="margin-left: 30px;">
+                             <a href="toWrongPractice">错题练习</a>
+                        </span>
+                    </a>
+                </span>
+                <br>
+                <button class="btn btn-group btn-info list-group-item-info list-group-item" style="text-align: center;">
+                    <a href="mockExam">模拟考试</a></button>
+            </div>
+
+            <div class=" col-md-4 col-xs-6 ulKaoShi2" style="line-height: 50px;margin-top: 10px">
+                <b class="" style="font-size: 20px;text-align: center">重庆2019小车理论考试科目四</b><br>
+                <a class=""
+                   style="line-height: 40px;text-align: center;width: 130px;height: 40px;background: rgba(221,205,226,0.22);margin-left: 20px">
+                    <a href="#">
+                        <span class="icon iconfont icon-zaixiankaoshi"
+                              style="font-size: 25px;position: absolute;top: 50px;left:28px"></span>
+                        <span style="margin-left: 30px;">
+                             <a href="practice2">顺讯练习</a>
+                        </span>
+                    </a>
+                </a>
+                <a class=""
+                   style="line-height: 30px;text-align: center;width: 130px;height: 40px;background: rgba(221,205,226,0.22);margin-left: 20px">
+                    <a href="#">
+                        <span class="icon iconfont icon-kaoshi1"
+                              style="font-size: 30px;position: absolute;top: 50px;left:150px"></span>
+                        <span style="margin-left: 40px;">
+                             <a href="practice">随机练习</a>
+                        </span>
+                    </a>
+                </a>
+                <span class="wrongItem"
+                      style=";text-align: center;width: 130px;height: 40px;background: rgba(221,205,226,0.22);margin-left: 20px">
+                    <a href="#">
+                        <span class="icon iconfont icon-tubiaozhizuomoban"
+                              style="font-size: 30px;position: absolute;top: 103px;left:28px"></span>
                         <span style="margin-left: 30px;">
                              <a href="toWrongPractice">错题练习</a>
                         </span>
@@ -305,76 +221,113 @@
                 <button class="btn btn-group btn-info list-group-item-info list-group-item" style="text-align: center;">
                     <a href="mockExam4">模拟考试</a></button>
             </div>
+
+            <div class="xueChe col-xs-12 col-md-12" style="margin-bottom: 40px;">
+                <h3 class="text-center">学车流程</h3>
+                <div class="col-md-2 col-xs-4 text-center">
+                        <span class="iconfont icon-che1"></span>
+                        <br><h3>找驾校</h3>
+                </div>
+                <div class="col-md-2 col-xs-4 text-center">
+                    <span class="iconfont icon-icon-kaoshijilu"></span>
+                    <br><h3>科目一</h3>
+                </div>
+                <div class="col-md-2 col-xs-4 text-center">
+                    <span class="iconfont icon-cheliang"></span>
+                    <br><h3>科目二</h3>
+                </div>
+                <div class="col-md-2 col-xs-4 text-center">
+                    <span class="iconfont icon-chepai"></span>
+                    <br><h3>科目三</h3>
+                </div>
+                <div class="col-md-2 col-xs-4 text-center">
+                    <span class="iconfont icon-zaixiankaoshi"></span>
+                    <br><h3>科目四</h3>
+                </div>
+                <div class="col-md-2 col-xs-4 text-center">
+                    <span class="iconfont icon-jiashizhengzhuanru"></span>
+                    <br><h3>拿本</h3>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-<!--botter-->
-<footer>
-    <div class="footer_content">
-        <div class="top">
-            <div class="d1">
-                <div class="d1_1">
-                    <span class="span1">关于</span>
-                    <span class="span2">BY一考通</span>
-                    <span class="span3">About swallow</span>
-                    <a href=""> <span class="span4">MORE>></span></a>
+<!--fotter-->
+<footer style="background: #000;">
+    <div class="container">
+        <div class="agile-footer-grids">
+            <div class="col-md-4 agile-footer-grid">
+                <p></p>
+               <span style="color: #7f7f7f">关于</span>&nbsp;<span style="color: #fbfbf7;font-size: 16px;font-family: '微软雅黑'">BY一考通</span>
+                <div class="agile-footer-info">
+                    <p style="color: #7f7f7f">BY一考通是一个可以免费在线刷题、练习、模拟考试的驾考模拟考试系统，用户登录后即可记录错题，考试完成生成成绩，计算考试合格率等</p>
+                    <h5 style="color: #7f7f7f">在此订阅</h5>
+                    <form action="#" method="post">
+                        <input type="email" name="Email" placeholder="Email" required="">
+                        <input type="submit" class="" value="提交">
+                    </form>
                 </div>
-                <div class="d1_2">
-                    <sapn>BY一考通是本人的毕业设计。该项目为用户提供免费的驾驶员理论模拟考试，
-                        用户注册登录后进行考试可以记录考试信息，查看考试成绩、次数、过关率等。
-                    </sapn>
-                    <div class="over">
-                        <span class="span1">地址：重庆市渝北区郑家院子香奈公馆</span><br>
-                        <span class="span2">Emal:www.xxxx@.163.com   <br>  联系电话：0371-10000000 <br> 版权信息：版权归本人</span>
+            </div>
+            <div class="col-md-4 agile-footer-grid">
+                <h4>Recent Posts</h4>
+                <div class="agile-post-grids">
+                    <div class="agile-post-grid">
+                        <div class="col-md-5 agile-post-left">
+                            <a href="single.html">
+                                <img src="images/p1.jpg" alt="">
+                            </a>
+                        </div>
+                        <div class="col-md-7 agile-post-right">
+                            <h5><a href="single.html">Nulla at arcu eu justo blandit eleifend.</a></h5>
+                            <p><i class="fa fa-calendar-o" aria-hidden="true"></i> 03 Jan 2017</p>
+                        </div>
+                        <div class="clearfix"> </div>
+                    </div>
+                    <div class="agile-post-grid">
+                        <div class="col-md-5 agile-post-left">
+                            <a href="single.html">
+                                <img src="images/p2.jpg" alt="">
+                            </a>
+                        </div>
+                        <div class="col-md-7 agile-post-right">
+                            <h5><a href="single.html">Nulla at arcu eu justo blandit eleifend.</a></h5>
+                            <p><i class="fa fa-calendar-o" aria-hidden="true"></i> 24 Jan 2017</p>
+                        </div>
+                        <div class="clearfix"> </div>
                     </div>
                 </div>
-
             </div>
-            <div class="d2">
-                <div class="d2_1">
-                    <span class="span1">我们</span>
-                    <span class="span2">的团队</span>
-                    <span class="span3">Our team</span>
-                    <a href=""> <span class="span4">MORE>></span></a>
+            <div class="col-md-4 agile-footer-grid">
+                <h4>Flickr Images</h4>
+                <div class="popular-grids">
+                    <div class="popular-grid">
+                        <a href="single.html"><img src="images/f1.jpg" alt=""></a>
+                    </div>
+                    <div class="popular-grid">
+                        <a href="single.html"><img src="images/f2.jpg" alt=""></a>
+                    </div>
+                    <div class="popular-grid">
+                        <a href="single.html"><img src="images/f3.jpg" alt=""></a>
+                    </div>
+                    <div class="clearfix"> </div>
                 </div>
-                <div class="d2_2">
-                    <img src="images/booter_team.png" alt="">
+                <div class="popular-grids">
+                    <div class="popular-grid">
+                        <a href="single.html"><img src="images/f4.jpg" alt=""></a>
+                    </div>
+                    <div class="popular-grid">
+                        <a href="single.html"><img src="images/f5.jpg" alt=""></a>
+                    </div>
+                    <div class="popular-grid">
+                        <a href="single.html"><img src="images/f6.jpg" alt=""></a>
+                    </div>
+                    <div class="clearfix"> </div>
                 </div>
             </div>
-            <div class="d3">
-                <div class="d3_1">
-                    <span class="span1">快捷</span>
-                    <span class="span2">入口</span>
-                    <a href=""> <span class="span4">MORE>></span></a>
-                </div>
-                <ul class="d3_ul">
-                    <a href="#">
-                        <li>关于我们 ABOUT</li>
-                    </a>
-                    <a href="#">
-                        <li>顾客分享 SHOWLOVE</li>
-                    </a>
-                    <a href="#">
-                        <li>招贤纳士 CAREERS</li>
-                    </a>
-                    <a href="#">
-                        <li>教练陪练 PHOTOli</li>
-                    </a>
-                    <a href="#">
-                        <li>知名驾校 W.P.T.</li>
-                    </a>
-                    <a href="#">
-                        <li>传媒合作 MEDIA</li>
-                    </a>
-                    <a href="#">
-                        <li>加入我们 WEDDING</li>
-                    </a>
-                </ul>
-            </div>
+            <div class="clearfix"> </div>
         </div>
     </div>
 </footer>
-
 <!--登录-->
 <div class="modal fade login-modal" id="login-modal" tabindex="-1">
     <div class="modal-dialog modal-sm">
@@ -389,16 +342,16 @@
                 <div>
                     <!--<form method="post">-->
                     <div class="form-group">
-                        <label for="username">Username <!--<span
-                                class="glyphicon glyphicon-user"></span> --><input type="text"
+                        <label for="username">Username <span
+                                class="glyphicon glyphicon-user"></span> <input type="text"
                                                                                    name="username" class="form-control"
                                                                                    id="username"
                                                                                    placeholder="输入用户名"
                                                                                    style="padding-left: 22px"></label>
                     </div>
                     <div class="form-group">
-                        <label for="password">Password <!--<span
-                                class="glyphicon glyphicon-lock"></span> --><input type="password"
+                        <label for="password">Password <span
+                                class="glyphicon glyphicon-lock"></span> <input type="password"
                                                                                    name="password" class="form-control"
                                                                                    id="password"
                                                                                    placeholder="输入密码"
@@ -427,14 +380,16 @@
             <div class="modal-body">
                 <div id="form2">
                     <div class="form-group">
-                        <label for="username">Username <input type="text"
+                        <label for="username">Username<span
+                                class="glyphicon glyphicon-user"></span> <input type="text"
                                                               name="username" class="form-control"
                                                               id="rusername"
                                                               placeholder="输入用户名"
                                                               style="padding-left: 22px"></label>
                     </div>
                     <div class="form-group">
-                        <label for="password">Password
+                        <label for="password">Password <span
+                                class="glyphicon glyphicon-lock"></span>
                             <input type="password"
                                    name="password" class="form-control"
                                    id="rpassword"
@@ -442,7 +397,8 @@
                                    style="padding-left: 22px"></label>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-group-xs" style="color: white" id="userRegister">注册</button>
+                        <button type="submit" class="btn btn-group-xs" style="color: white" id="userRegister">注册
+                        </button>
                     </div>
                 </div>
             </div>
@@ -452,21 +408,6 @@
 </body>
 <script type="text/javascript">
     $(function () {
-        //显示二级菜单
-        $(".ulDaoHang>li").hover( function () {
-                // $("#erji").show();
-                $(this).has("ul").children("ul").fadeIn();
-            }
-            ,function () {
-                // $("#erji").hide();
-                $(this).has("ul").children("ul").fadeOut();
-            })
-        $(".erji>li").hover(function () {
-            $(this).css("background","#000");
-        },function () {
-            $(this).css("background","#1d1d1d");
-        })
-
         //用户未登录，隐藏错题
         $(".wrongItem").hide();
         //申明localstorage

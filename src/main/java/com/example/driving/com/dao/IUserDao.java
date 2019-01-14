@@ -33,5 +33,7 @@ public interface IUserDao {
      * @param id
      * @return
      */
-    List queryUser(int id);
+    List queryUser(int id,int pageNo,int pageSize);
+
+    List queryUserAll(int id);
 }

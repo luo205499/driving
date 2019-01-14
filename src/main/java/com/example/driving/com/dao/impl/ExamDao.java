@@ -28,9 +28,9 @@ public class ExamDao implements IExamDao {
      * @return
      */
     @Override
-    public int addExam(int uid, int grade) {
-        String sql = "insert into exam (u_id,grade,examTime) values (?,?,?)";
+    public int addExam(int uid, int grade,int type) {
+        String sql = "insert into exam (u_id,grade,type,examTime) values (?,?,?,?)";
         Timestamp examTime=new Timestamp(System.currentTimeMillis());
-        return jdbcTemplate.update(sql, uid, grade,examTime);
+        return jdbcTemplate.update(sql, uid, grade,type,examTime);
     }
 }

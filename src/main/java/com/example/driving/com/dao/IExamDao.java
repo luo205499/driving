@@ -14,5 +14,5 @@ public interface IExamDao {
      * @param grade
      * @return
      */
-    int addExam(int uid,int grade);
+    int addExam(int uid,int grade,int type);
 }

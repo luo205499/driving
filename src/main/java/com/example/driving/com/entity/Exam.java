@@ -21,6 +21,7 @@ public class Exam implements Serializable {
     private Integer id;//试卷id
     private Integer uId;//用户id
     private Integer grade;//考试成绩
+    private Integer type;//考试类型
     private Timestamp examTime;//考试完成时间
 
 }

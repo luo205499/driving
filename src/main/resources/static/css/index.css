@@ -26,12 +26,12 @@ body {
 
 .glyphicon-user {
   position: absolute;
-  top: 25%;
+  top:45px;
   left: 20px; }
 
 .glyphicon-lock {
   position: absolute;
-  top: 66.5%;
+  top: 117px;
   left: 20px; }
 
 .carousel {
@@ -74,157 +74,4 @@ body {
 .coment{
   margin-top: 60px;
 }
-footer {
-  height: 306px;
-  min-width: 1340px;
-  width: 100%;
-  background: #000;
-}
-footer .footer_content {
-  margin-left: auto;
-  margin-right: auto;
-  height: 306px;
-  width: 960px; }
-footer .footer_content .top {
-  width: 960px;
-  height: 270px;
-  margin-left: auto;
-  margin-right: auto; }
-footer .footer_content .top .d1 {
-  margin-left: 50px;
-  height: 250px;
-  width: 320px;
-  float: left; }
-footer .footer_content .top .d1 .d1_1 {
-  position: relative;
-  margin-top: 20px;
-  width: 275px;
-  height: 30px;
-  background-color: #222222;
-  line-height: 30px; }
-footer .footer_content .top .d1 .d1_1 .span1 {
-  color: #f06c08;
-  font-family: 幼圆;
-  font-size: 19px;
-  font-weight: bolder; }
-footer .footer_content .top .d1 .d1_1 .span2 {
-  color: #d7cdcd;
-  font-size: 15px; }
-footer .footer_content .top .d1 .d1_1 .span3 {
-  color: #d7cdcd;
-  font-size: 12px; }
-footer .footer_content .top .d1 .d1_1 .span4 {
-  font-size: 12px;
-  font-family: "Microsoft YaHei";
-  background-color: #000000;
-  color: #a7a4a4;
-  display: inline-block;
-  height: 30px;
-  width: 60px;
-  position: absolute;
-  right: 0px;
-  overflow: hidden;
-  text-align: center; }
-footer .footer_content .top .d1 .d1_2 {
-  margin-top: 30px;
-  width: 275px;
-  height: 180px;
-  color: #d7cdcd;
-  font-family: "Adobe 宋体 Std L";
-  font-size: 12px;
-  line-height: 20px;
-  overflow: hidden; }
-footer .footer_content .top .d2 {
-  height: 250px;
-  width: 300px;
-  float: left; }
-footer .footer_content .top .d2 .d2_1 {
-  position: relative;
-  margin-left: 20px;
-  margin-top: 20px;
-  width: 275px;
-  height: 30px;
-  background-color: #222222;
-  line-height: 30px; }
-footer .footer_content .top .d2 .d2_1 .span1 {
-  color: #f06c08;
-  font-family: 幼圆;
-  font-size: 19px;
-  font-weight: bolder; }
-footer .footer_content .top .d2 .d2_1 .span2 {
-  color: #d7cdcd;
-  font-size: 15px; }
-footer .footer_content .top .d2 .d2_1 .span3 {
-  color: #d7cdcd;
-  font-size: 12px; }
-footer .footer_content .top .d2 .d2_1 .span4 {
-  font-size: 12px;
-  font-family: "Microsoft YaHei";
-  background-color: #000000;
-  color: #a7a4a4;
-  display: inline-block;
-  height: 30px;
-  width: 60px;
-  position: absolute;
-  right: 0px;
-  text-align: center;
-  overflow: hidden; }
-footer .footer_content .top .d2 .d2_2 {
-  margin-top: 10px;
-  margin-left: 20px;
-  width: 275px;
-  height: 190px;
-  box-shadow: -3px 3px 3px 3px #000000; }
-footer .footer_content .top .d3 {
-  height: 250px;
-  width: 270px;
-  float: left;
-  margin-left: 20px; }
-footer .footer_content .top .d3 .d3_1 {
-  position: relative;
-  margin-left: 20px;
-  width: 245px;
-  height: 30px;
-  background-color: #222222;
-  line-height: 30px;
-  margin-top: 20px; }
-footer .footer_content .top .d3 .d3_1 .span1 {
-  color: #f06c08;
-  font-family: 幼圆;
-  font-size: 19px;
-  font-weight: bolder; }
-footer .footer_content .top .d3 .d3_1 .span2 {
-  color: #d7cdcd;
-  font-size: 15px; }
-footer .footer_content .top .d3 .d3_1 .span4 {
-  font-size: 12px;
-  font-family: "Microsoft YaHei";
-  background-color: #000000;
-  color: #a7a4a4;
-  display: inline-block;
-  height: 30px;
-  width: 60px;
-  position: absolute;
-  right: 0px;
-  text-align: center;
-  overflow: hidden; }
-footer .footer_content .top .d3 .d3_ul {
-  margin-left: 20px;
-  margin-top: 20px;
-  font-size: 12px; }
-footer .footer_content .top .d3 .d3_ul > a {
-  color: #666666;
-  line-height: 20px; }
-footer .footer_content .bottom {
-  width: 960px;
-  height: 115px;
-  margin-left: auto;
-  margin-right: auto; }
-footer .footer_content .bottom .log {
-  margin-top: 10px;
-  margin-left: 20px;
-  float: left; }
-footer .footer_content .over .span1 {
-  display: inline-block;
-  margin-top: 15px; }
 /*# sourceMappingURL=index.css.map */

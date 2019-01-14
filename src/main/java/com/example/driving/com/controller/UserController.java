@@ -76,8 +76,14 @@ public class UserController {
 	 */
 	@RequestMapping("queryUser")
 	@ResponseBody
+	public List queryUser(int id,int pageNo,int pageSize){
+		return userService.queryUser(id,pageNo,pageSize);
+	}
+
+	@RequestMapping("queryUserAll")
+	@ResponseBody
 	public List queryUser(int id){
-		return userService.queryUser(id);
+		return userService.queryUserAll(id);
 	}
 	@RequestMapping("/")
 	public String pageIndex(){
@@ -86,5 +92,10 @@ public class UserController {
 	@RequestMapping("/backHome")
 	public String backHome(){
 		return "pageIndex";
+	}
+
+	@RequestMapping("/test")
+	public String uploadimg(){
+		return "uploadimg";
 	}
 }

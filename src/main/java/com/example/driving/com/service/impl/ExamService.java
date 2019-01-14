@@ -26,7 +26,7 @@ public class ExamService implements IExamService {
      * @return
      */
     @Override
-    public int addExam(int uid, int grade) {
-        return examDao.addExam(uid,grade);
+    public int addExam(int uid, int grade,int type) {
+        return examDao.addExam(uid,grade,type);
     }
 }

@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>用户信息</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
 <!DOCTYPE html>
@@ -15,20 +16,24 @@
     <script src="js/bootstrap.min.js"></script>
     <style>
         html, body {
-            overflow: hidden;
             background: #14191C;
             margin: 0;
         }
+        .glyphicon-user {
+            position: absolute;
+            top:45px;
+            left: 20px; }
 
+        .glyphicon-lock {
+            position: absolute;
+            top: 117px;
+            left: 20px; }
         .all{
             position: absolute;
             z-index: 999;
         }
         .tableUser {
-            margin-top: 160px;
-            border: solid 1px;
-            border-radius: 6%;
-            margin-left: 40px;
+            margin-top: 60px;
             font-size: 18px;
             color: #d1f5de;
         }
@@ -65,67 +70,241 @@
                 top: 15%; } }
         .item img {
             width: 100%; }
-
+        .dropdown-menu{
+            margin: 0;
+            padding: 0;
+            border: 1px solid #000;
+            background: #2f2f2f;
+            min-width: 100px;
+            height: 55px;
+        }
+        .dropdown-menu>li{
+            width: 100px;
+            border-radius: 4px;
+        }
+        .dropdown-menu>li a{
+            color: #9a9a98;
+            width: 100px;
+            border-radius: 4px;
+        }
+        .dropdown-menu>li a:hover{
+            background: #000000;
+            color: white;
+            border-radius: 4px;
+        }
     </style>
 </head>
-<body>
+<body onload="RunOnBeforeUnload()">
 <!--导航-->
-<nav class="navbar navbar-inverse navbar-fixed-top">
+<nav class="navbar navbar-inverse navbar-fixed-top navtop">
     <div class="container">
         <div class="navbar-header">
             <button class="navbar-toggle" data-toggle="collapse"
                     data-target="#response-collapse">
-                <span class="icon-bar"></span> <span class="icon-bar"></span> <span
-                    class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
             </button>
-            <a href="backHome" class="navbar-brand"><strong>毕业设计</strong></a>
+            <a href="backHome" class="">
+                <!--<strong>BY一考通</strong>-->
+                <img src="images/LOGO_03.png" alt="LOGO" width="100px" style="display: block;line-height:90px;">
+            </a>
         </div>
         <div class="collapse navbar-collapse" id="response-collapse">
-            <ul class="nav navbar-nav" id="nav">
-                <li class="itemdisplay" style="display: block"><a href="#">添加试题</a></li>
-                <li><a href="#" id="mockExam">模拟考试</a></li>
-                <li><a href="#">随机练习</a></li>
-                <li><a href="#">顺序练习</a></li>
+            <ul class="nav navbar-nav ulDaoHang" id="nav">
+                <li class="itemdisplay" style="display: none"><a href="toaddItem">添加试题</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="mockExam">模拟考试
+                        <span class="caret">
+                                </span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="mockExam">科目一</a></li>
+                        <li><a href="mockExam4">科目四</a></li>
+                    </ul>
+                </li>
+                <li><a href="practice">随机练习</a></li>
+                <li><a href="practice2">顺序练习</a></li>
                 <li><a href="#">联系我们</a></li>
             </ul>
-            <form action="" class="navbar-form navbar-left">
-                <input type="text" placeholder="搜索" class="form-control">
-                <button type="submit">
-                    <span class="glyphicon glyphicon-search"></span>
-                </button>
-            </form>
+            <div class="profile navbar-right">
+                <ul class="nav navbar-nav">
+                    <li class="nowuser" style="display: none;"><a href="#" id="loginOut">退出当前用户:</a></li>
+                    <li><a href="displayUser" class="usernamedisplay"></a></li>
+                    <li class="displaylogin"><a href="#" data-toggle="modal"
+                                                data-target="#login-modal">登录</a></li>
+                    <li class="displaylogin"><a href="#" data-toggle="modal"
+                                                data-target="#register-modal">注册</a></li>
+                </ul>
+            </div>
         </div>
     </div>
 </nav>
 <!--试题-->
-<div class="container all">
-    <div class="col-md-8 col-sm-6 col-xs-6  examleft">
-        <div class="tableUser">
-            <table class="table tab-content">
-                <th class="list-group-item-heading text-center username">试卷id</th>
-                <th class="list-group-item-heading text-center examItem" id="grade">分数</th>
-                <th class="list-group-item-heading text-center examItem" id="examTime">考试时间</th>
+<div class="all">
+    <div class="container">
+        <div class="tableUser col-md-8 col-sm-12 col-xs-12">
+            <span id="userJige" style="font-family: '微软雅黑';font-size: 16px;">考试合格率：</span><br>
+            <table class="table table-bordered">
+                <th class=" text-center username">试卷id</th>
+                <th class=" text-center examItem" id="grade">分数</th>
+                <th class=" text-center examItem" id="hege">考试合格</th>
+                <th class=" text-center examItem" id="">考试类型</th>
+                <th class=" text-center examItem" id="examTime">考试时间</th>
                 <tbody class="listUser"></tbody>
             </table>
+            <button class="btn btn-success" id="above">上一页</button>
+            <button class="btn btn-success" id="next">下一页</button>
         </div>
+
     </div>
     <canvas class="canvas" id="canvas" style="display:block; margin:50px auto;">当前浏览器不支持canvascanvas</canvas>
 </div>
+
+<!--登录-->
+<div class="modal fade login-modal" id="login-modal" tabindex="-1">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal">&times;</button>
+                <h4>
+                    <b>用户登录</b>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <!--<form method="post">-->
+                    <div class="form-group">
+                        <label for="username">Username <span
+                                class="glyphicon glyphicon-user"></span> <input type="text"
+                                                                                   name="username" class="form-control"
+                                                                                   id="username"
+                                                                                   placeholder="输入用户名"
+                                                                                   style="padding-left: 22px"></label>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password <span
+                                class="glyphicon glyphicon-lock"></span> <input type="password"
+                                                                                   name="password" class="form-control"
+                                                                                   id="password"
+                                                                                   placeholder="输入密码"
+                                                                                   style="padding-left: 22px"></label>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="submit" class="btn btn-group-xs" id="userLogin" style="color: white;background: #000;" value="登录">
+                        <!--<button onclick="loginUser()" class="btn btn-group-xs">login</button>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--注册-->
+<div class="modal fade login-modal" id="register-modal" tabindex="-1">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal">&times;</button>
+                <h4>
+                    <b>用户注册</b>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div id="form2">
+                    <div class="form-group">
+                        <label for="username">Username <span
+                                class="glyphicon glyphicon-user"></span> <input type="text"
+                                                              name="username" class="form-control"
+                                                              id="rusername"
+                                                              placeholder="输入用户名"
+                                                              style="padding-left: 22px"></label>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password<span
+                                class="glyphicon glyphicon-lock"></span>
+                            <input type="password"
+                                   name="password" class="form-control"
+                                   id="rpassword"
+                                   placeholder="输入密码"
+                                   style="padding-left: 22px"></label>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-group-xs" style="color: white;background: #000;" id="userRegister">注册
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 <script src="js/beijing.js"></script>
-<script src="js/lang.js"></script>
-<!--<script src="js/huiTaiLang.js"></script>-->
 <script>
+    //刷新提示
+    function RunOnBeforeUnload() {window.onbeforeunload = function(){ return '将丢失未保存的数据!'; } }
     $(function () {
         var storage=window.localStorage;
+        var username=storage.getItem("username");
+        var pageNo=0;
+        var pageSize=5;
+        //下一页
+        $("#next").on("click",function () {
+            queryUser();
+        });
+
+
+        //上一页
+        $("#above").on("click",function () {
+            if(pageNo>6){
+                pageNo=pageNo-pageSize-pageSize;
+                queryUser();
+            }else{
+                alert("没有上一页");
+            }
+
+        });
+
+        queryUserAll();
+        queryUser();
+
+
+
+        //计算合格率
+        function queryUserAll() {
+            $.ajax({
+                url : "queryUserAll",
+                data : {
+                    id:storage.getItem("id"),
+                },
+                type : "POST",
+                dataType : "json",
+                success : function(res) {
+                    if(res.length==0){
+                        $(".listUser").html("<div class='text-center list-group-item-heading'>" +"暂无数据......" + "</div>");
+                    }else{
+                        var jige=0;
+                        var i=0;
+                        for ( i;i<res.length;i++){
+                            if(res[i].grade>=90){
+                                jige=jige+1;
+                            }
+                        }
+                        $("#userJige").html("考试合格率:"+(jige/i).toFixed(4)*100+"%");
+                    }
+                }
+            });
+        }
 
         //获取用户信息
-        queryUser();
         function queryUser() {
             $.ajax({
                 url : "queryUser",
                 data : {
-                    id:storage.getItem("id")
+                    id:storage.getItem("id"),
+                    pageNo:pageNo,
+                    pageSize:pageSize
+
                 },
                 type : "POST",
                 dataType : "json",
@@ -133,18 +312,33 @@
                   if(res.length==0){
                       $(".listUser").html("<div class='text-center list-group-item-heading'>" +"暂无数据......" + "</div>");
                   }else{
+                      var i=0;
+                      var type="";
                     var html = "";
-                    for (var i = 0;i<res.length;i++){
-
+                    for ( i;i<res.length;i++){
+                        //格式化日期
+                        var hege="否";
+                        if(res[i].grade>=90){
+                            hege="是";
+                        }
+                        if(res[i].type==0){
+                            type="科目一";
+                        }
+                        if(res[i].type==1){
+                            type="科目四";
+                        }
+                         res[i].examTime = new Date(+new Date(res[i].examTime)+8*3600*1000).toISOString().replace(/T/g,' ').replace(/\.[\d]{3}Z/,'');
                         html += "<tr>";
                         html += "<td class='text-center'>" + res[i].id + "</td>";
                         html += "<td class='text-center'>" + res[i].grade + "</td>";
-                        html += "<td class='text-center'>" + res[i].examTime + "</td>";
+                        html += "<td class='text-center'>" + hege + "</td>";
+                        html += "<td class='text-center'>" + type + "</td>";
+                        html += "<td class='text-center'>" +res[i].examTime + "</td>";
                         html += "</tr>";
-
                     }
                     $(".listUser").html(html);
-                }
+                  }
+                    pageNo=pageNo+pageSize;
                 }
             });
         }
@@ -155,6 +349,70 @@
                 $(".itemdisplay").css("display","none");
             }
         }
+        //登陆成功后隐藏登录注册按钮
+        function displayuser() {
+            a = $(".usernamedisplay").text();
+            if (a != "") {
+                /* $(".displaylogin").css('display', 'none');
+                 $(".nowuser").css('display', 'block');*/
+                $(".wrongItem").fadeIn(1000);
+                $(".displaylogin").fadeOut(1000);
+                $(".nowuser").fadeIn(2000);
+            }
+        }
+
+        //登录
+        $("#userLogin").on("click", function () {
+            $.ajax({
+                url: "/login",//url
+                type: "POST",//方法类型
+                dataType: "json",//预期服务器返回的数据类型
+                data: {username: $("#username").val(), password: $("#password").val()},
+                success: function (res) {
+                    storage.setItem("username", res.username);
+                    storage.setItem("id", res.id);
+                    storage.setItem("type", res.type);
+                    window.location.reload(); //刷新当前页面
+                },
+                error: function () {
+                    alert("登录失败！");
+                }
+            });
+        });
+
+        //注册
+        $("#userRegister").on("click", function () {
+            $.ajax({
+                url: "/register",
+                type: "POST",
+                dataType: "json",
+                data: {username: $("#rusername").val(), password: $("#rpassword").val()},
+                success: function (res) {
+                    alert("注册成功");
+                    storage.setItem("username", res.username);
+                    storage.setItem("id", res.id);
+                    storage.setItem("type", res.type);
+                    window.location.reload(); //刷新当前页面
+                }, error: function () {
+                    alert("注册失败！");
+                }
+
+            });
+        });
+        //退出登录
+        $("#loginOut").on("click", function () {
+            localStorage.removeItem("username");
+            localStorage.removeItem("id");
+            localStorage.removeItem("type");
+            window.location.reload(); //刷新当前页面
+        });
+        var storage = window.localStorage;
+        //从localstorage获得用户信息
+        $(".usernamedisplay").text(storage.getItem("username"));
+        //刷新当前用户
+        setInterval(function () {
+            displayuser();
+        }, 1000);
     })
 </script>
 </html>

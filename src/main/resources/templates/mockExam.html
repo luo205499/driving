@@ -2,11 +2,21 @@
 <head>
     <meta charset="UTF-8">
     <title>模拟考试</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <script src="js/jquery-3.2.1.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/beijing.js"></script>
     <style>
+        .glyphicon-user {
+            position: absolute;
+            top:45px;
+            left: 20px; }
+
+        .glyphicon-lock {
+            position: absolute;
+            top: 117px;
+            left: 20px; }
         .timespan {
             font-size: 20px;
             color: #1330d8;
@@ -25,7 +35,7 @@
             margin-top: 160px;
             border: solid 1px;
             border-radius: 6%;
-            margin-left: 40px;
+            /*margin-left: 40px;*/
             font-size: 18px;
         }
 
@@ -40,30 +50,13 @@
             margin: 0;
             background: #14191C;
         }
-
-        html {
-
-        }
-
         .all {
             position: absolute;
             z-index: 999;
         }
-
         .J_TbData {
             color: #bdbdbd;
         }
-
-        .examItem {
-            /*background-color: #a2a2a2;*/
-
-        }
-
-        .itemright {
-            /*margin-right: 60px;*/
-            padding-left: 60px;
-        }
-
         .navbar-inverse input[type="text"] {
             background: #313131;
             border: none;
@@ -99,13 +92,13 @@
         }
 
         .login-modal .modal-content {
-            background-color: rgba(144, 223, 255, 0.15);
-            color: #fefff6;
+            background-color: rgb(253, 255, 240);
+            color: #000000;
         }
 
         .login-modal .modal-content .modal-body input {
-            color: white;
-            background: rgba(0, 0, 0, 0.45);
+            color: #000000;
+            background: rgba(245, 245, 245, 0.8);
         }
 
         .login-modal .modal-content .modal-header .close {
@@ -122,18 +115,15 @@
             width: 150px;
         }
 
-        .register-modal {
-            padding-top: 50px;
-        }
 
         .register-modal .modal-content {
-            background-color: rgba(144, 223, 255, 0.15);
-            color: #fefff6;
+            background-color: rgb(247, 244, 255);
+            color: #000000;
         }
 
         .register-modal .modal-content .modal-body input {
-            color: white;
-            background: rgba(0, 0, 0, 0.45);
+            color: #000000;
+            background: rgba(255, 255, 255, 0.98);
         }
 
         .register-modal .modal-content .modal-header .close {
@@ -149,40 +139,68 @@
             background: rgba(0, 0, 0, 0.92);
             width: 150px;
         }
-
+        .dropdown-menu{
+            margin: 0;
+            padding: 0;
+            border: 1px solid #000;
+            background: #2f2f2f;
+            min-width: 100px;
+            height: 55px;
+        }
+        .dropdown-menu>li{
+            width: 100px;
+            border-radius: 4px;
+        }
+        .dropdown-menu>li a{
+            color: #9a9a98;
+            width: 100px;
+            border-radius: 4px;
+        }
+        .dropdown-menu>li a:hover{
+            background: #000000;
+            color: white;
+            border-radius: 4px;
+        }
 
     </style>
 </head>
 <body onload="RunOnBeforeUnload()">
 <!--导航-->
-<nav class="navbar navbar-inverse navbar-fixed-top">
+<nav class="navbar navbar-inverse navbar-fixed-top navtop">
     <div class="container">
         <div class="navbar-header">
             <button class="navbar-toggle" data-toggle="collapse"
                     data-target="#response-collapse">
-                <span class="icon-bar"></span> <span class="icon-bar"></span> <span
-                    class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
             </button>
-            <a href="backHome" class="navbar-brand"><strong>毕业设计</strong></a>
+            <a href="backHome" class="">
+                <!--<strong>BY一考通</strong>-->
+                <img src="images/LOGO_03.png" alt="LOGO" width="100px" style="display: block;line-height:90px;">
+            </a>
         </div>
         <div class="collapse navbar-collapse" id="response-collapse">
-            <ul class="nav navbar-nav" id="nav">
-                <li class="itemdisplay" style="display: block"><a href="#">添加试题</a></li>
-                <li><a href="mockExam" id="mockExam">模拟考试</a></li>
-                <li><a href="#">随机练习</a></li>
-                <li><a href="#">顺序练习</a></li>
+            <ul class="nav navbar-nav ulDaoHang" id="nav">
+                <li class="itemdisplay" style="display: none"><a href="toaddItem">添加试题</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="mockExam">模拟考试
+                        <span class="caret">
+                                </span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="mockExam">科目一</a></li>
+                        <li><a href="mockExam4">科目四</a></li>
+                    </ul>
+                </li>
+                <li><a href="practice">随机练习</a></li>
+                <li><a href="practice2">顺序练习</a></li>
                 <li><a href="#">联系我们</a></li>
             </ul>
-            <form action="" class="navbar-form navbar-left">
-                <input type="text" placeholder="搜索" class="form-control">
-                <button type="submit">
-                    <span class="glyphicon glyphicon-search"></span>
-                </button>
-            </form>
             <div class="profile navbar-right">
                 <ul class="nav navbar-nav">
                     <li class="nowuser" style="display: none;"><a href="#" id="loginOut">退出当前用户:</a></li>
-                    <li><a href="queryUser" class="usernamedisplay"></a></li>
+                    <li><a href="displayUser" class="usernamedisplay"></a></li>
                     <li class="displaylogin"><a href="#" data-toggle="modal"
                                                 data-target="#login-modal">登录</a></li>
                     <li class="displaylogin"><a href="#" data-toggle="modal"
@@ -206,23 +224,23 @@
                 <div>
                     <!--<form method="post">-->
                     <div class="form-group">
-                        <label for="username">Username <!--<span
-                                class="glyphicon glyphicon-user"></span> --><input type="text"
+                        <label for="username">Username <span
+                                class="glyphicon glyphicon-user"></span> <input type="text"
                                                                                    name="username" class="form-control"
                                                                                    id="username"
                                                                                    placeholder="输入用户名"
                                                                                    style="padding-left: 22px"></label>
                     </div>
                     <div class="form-group">
-                        <label for="password">Password <!--<span
-                                class="glyphicon glyphicon-lock"></span> --><input type="password"
+                        <label for="password">Password <span
+                                class="glyphicon glyphicon-lock"></span> <input type="password"
                                                                                    name="password" class="form-control"
                                                                                    id="password"
                                                                                    placeholder="输入密码"
                                                                                    style="padding-left: 22px"></label>
                     </div>
                     <div class="modal-footer">
-                        <input type="submit" class="btn btn-group-xs" id="userLogin" value="login">
+                        <input type="submit" class="btn btn-group-xs" style="color:#fff;" id="userLogin" value="login">
                         <!--<button onclick="loginUser()" class="btn btn-group-xs">login</button>-->
                     </div>
                 </div>
@@ -244,14 +262,16 @@
             <div class="modal-body">
                 <div id="form2">
                     <div class="form-group">
-                        <label for="username">Username <input type="text"
+                        <label for="username">Username <span
+                                class="glyphicon glyphicon-user"></span> <input type="text"
                                                               name="username" class="form-control"
                                                               id="rusername"
                                                               placeholder="输入用户名"
                                                               style="padding-left: 22px"></label>
                     </div>
                     <div class="form-group">
-                        <label for="password">Password
+                        <label for="password">Password <span
+                                class="glyphicon glyphicon-lock"></span>
                             <input type="password"
                                    name="password" class="form-control"
                                    id="rpassword"
@@ -259,7 +279,7 @@
                                    style="padding-left: 22px"></label>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-group-xs" id="userRegister">注册</button>
+                        <button type="submit" class="btn btn-group-xs"  style="color:#fff;" id="userRegister">注册</button>
                     </div>
                 </div>
             </div>
@@ -269,7 +289,7 @@
 <!--试题-->
 <div class="container all">
     <div class="row">
-        <div class="col-md-8 col-sm-6 col-xs-6  examleft">
+        <div class="col-md-8 col-sm-12 col-xs-12  examleft">
             <div class="listExam">
                 <ul class="list-group list">
                     <li class="list-group-item-heading"><span class="itemNo">(题号)</span>
@@ -283,7 +303,7 @@
                 </ul>
             </div>
         </div>
-        <div class="col-md-4 col-sm-6 col-xs-6  itemright">
+        <div class="col-md-4 col-sm-12 col-xs-12  itemright">
             <div class="time">
                 <div class="timespan">
                     <span>剩余时间</span> <span class="joinm time"></span><span> :</span>
@@ -613,7 +633,7 @@
                     url: "/addExam",
                     type: "POST",
                     dataType: "json",
-                    data: {uid: storage.getItem("id"), grade: grade},
+                    data: {uid: storage.getItem("id"), grade: grade,type:0},
                     success: function (res) {
                     }, error: function () {
                     }
