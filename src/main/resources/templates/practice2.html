@@ -364,8 +364,8 @@
         itemdisplay();
 
         function itemdisplay() {
-            if (storage.getItem("type") != 1) {
-                $(".itemdisplay").css("display", "none");
+            if (storage.getItem("type") == 1) {
+                $(".itemdisplay").fadeIn(2000);
             }
         }
 

@@ -400,8 +400,8 @@
         itemdisplay();
 
         function itemdisplay() {
-            if (storage.getItem("type") != 1) {
-                $(".itemdisplay").css("display", "none");
+            if (storage.getItem("type") == 1) {
+                $(".itemdisplay").fadeIn(2000);
             }
         }
         //登陆成功后隐藏登录注册按钮

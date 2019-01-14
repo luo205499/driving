@@ -210,9 +210,10 @@
 
         //显示\隐藏题库
         itemdisplay();
+
         function itemdisplay() {
-            if(localStorage.getItem("type")!=1){
-                $(".itemdisplay").css("display","none");
+            if (storage.getItem("type") == 1) {
+                $(".itemdisplay").fadeIn(2000);
             }
         }
         $("#panduan").on("click",function () {

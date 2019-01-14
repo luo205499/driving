@@ -341,13 +341,7 @@
                 }
             });
         }
-        //显示\隐藏题库
-        itemdisplay();
-        function itemdisplay() {
-            if(storage.getItem("type")!=1){
-                $(".itemdisplay").css("display","none");
-            }
-        }
+
         //登陆成功后隐藏登录注册按钮
         function displayuser() {
             a = $(".usernamedisplay").text();
@@ -411,6 +405,14 @@
         setInterval(function () {
             displayuser();
         }, 1000);
+        //显示\隐藏题库
+        itemdisplay();
+
+        function itemdisplay() {
+            if (storage.getItem("type") == 1) {
+                $(".itemdisplay").fadeIn(2000);
+            }
+        }
     })
 </script>
 </html>
