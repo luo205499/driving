@@ -35,5 +35,17 @@ public interface IUserDao {
      */
     List queryUser(int id,int pageNo,int pageSize);
 
+    /**
+     * 查看用户信息
+     * @param id
+     * @return
+     */
     List queryUserAll(int id);
+
+    /**
+     * 根据用户名查询用户
+     * @param username
+     * @return
+     */
+    int queryUserByUsername(String username);
 }

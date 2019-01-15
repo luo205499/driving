@@ -177,6 +177,18 @@
                 </li>
                 <li><a href="practice">随机练习</a></li>
                 <li><a href="practice2">顺序练习</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="">针对练习
+                        <span class="caret">
+                                </span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu" style="height:105px; ">
+                        <li><a href="toForPractice?role=3">图片题</a></li>
+                        <li><a href="toForPractice?role=2">文字题</a></li>
+                        <li><a href="toForPractice?role=1">选择题</a></li>
+                        <li><a href="toForPractice?role=0">判断题</a></li>
+                    </ul>
+                </li>
                 <li><a href="#">联系我们</a></li>
             </ul>
             <div class="profile navbar-right">
@@ -250,6 +262,7 @@
                                                               id="rusername"
                                                               placeholder="输入用户名"
                                                               style="padding-left: 22px"></label>
+                        <br><i id="iusername" style="position: absolute;top:70px;"></i>
                     </div>
                     <div class="form-group">
                         <label for="password">Password <span
@@ -320,7 +333,23 @@
             $(".nowuser").css('display', 'block');
         }
     }
-
+    //判断用户是否存在
+    $("#rusername").on('blur',function () {
+        $.ajax({
+            url:'queryUserByUsername',
+            type:'post',
+            dataType:'json',
+            data:{username:$('#rusername').val()},
+            success:function (res) {
+                if(res!=0){
+                    $("#iusername").html("<span style=\"color: red\">用户名已存在</span>");
+                    $("#rusername").focus();
+                }else{
+                    $("#iusername").html("<span style=\"color: green\">用户名可以使用</span>");
+                }
+            }
+        })
+    })
     //登录
     $("#userLogin").on("click", function () {
         $.ajax({
@@ -341,22 +370,52 @@
     });
 
     //注册
-    $("#userRegister").on("click",function () {
-        $.ajax({
-            url:"/register",
-            type:"POST",
-            dataType:"json",
-            data: {username:$("#rusername").val(),password:$("#rpassword").val()},
-            success :function(res) {
-                storage.setItem("username",res.username);
-                storage.setItem("id",res.id);
-                storage.setItem("type",res.type);
-                $.Pop('<h5>注册成功</h5>','alert',function(){window.location.reload()});
-            },error : function() {
-                $.Pop('<h5>注册失败，请重新注册</h5>','alert',function(){window.location.reload()});
-            }
+    $("#userRegister").on("click", function () {
+        var myreg = /[^\s]/;
+        var myreg2 = /\w{5,17}$/;
+        //名称不能为空
+        if (!myreg.test($("#rusername").val())) {
+            $.Pro('用户名不能为空', {BoxBgopacity: 1});
+            $("#rusername").focus();
+        }
+        else if (!myreg2.test($("#rpassword").val())) {
+            $.Pro('请输入6~18密码', {BoxBgopacity: 1});
+            $("#rpassword").focus();
+        }
+        else {
+            $.ajax({
+                url: "/register",
+                type: "POST",
+                dataType: "json",
+                data: {username: $("#rusername").val(), password: $("#rpassword").val()},
+                success: function (res) {
+                    storage.setItem("username", res.username);
+                    storage.setItem("id", res.id);
+                    storage.setItem("type", res.type);
+                    $.Pop('<h5>注册成功</h5>', 'alert', function () {
+                        window.location.reload()
+                    });
+                }, error: function () {
+                    $.Pop('<h5>注册失败,请重新注册</h5>', 'alert', function () {
+                        window.location.reload()
+                    });
+                }
 
-        });
+            });
+        }
+    });
+    //enter提交登录、注册
+    $(document).keypress(function(e) {
+        // 回车键事件
+        if(e.which == 13) {
+            // jQuery(".confirmButton").click();
+            if($("#username").val()!=''){
+                jQuery("#userLogin").click();
+            }
+            else if($("#rusername").val()!=''){
+                jQuery("#userRegister").click();
+            }
+        }
     });
     //退出登录
     $("#loginOut").on("click",function () {

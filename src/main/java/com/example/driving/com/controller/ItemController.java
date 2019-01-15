@@ -159,11 +159,26 @@ public class ItemController {
 		return re;
 	}
 
+	//跳转到针对练习页面
+	@RequestMapping(value="/toForPractice")
+	public String toForPractice(int role,HttpServletRequest request) {
+		request.getSession().setAttribute("role",role);
+		return "forPractice";
+	}
+
+	@RequestMapping("/forPractice")
+	@ResponseBody
+	public Item forPractice(int pageNum,HttpServletRequest request){
+		return  itemService.forPractice(pageNum,request);
+	}
+
+
 	//跳转到上传文件的页面
 	@RequestMapping(value="/gouploadimg", method = RequestMethod.GET)
 	public String goUploadImg() {
 		//跳转到 templates 目录下的 uploadimg.html
 		return "uploadimg";
 	}
+
 
 }

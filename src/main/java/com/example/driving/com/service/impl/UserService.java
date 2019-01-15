@@ -58,5 +58,15 @@ public class UserService implements IUserService {
 		return userDao.queryUserAll(id);
 	}
 
+	/**
+	 * 根据用户名查询用户
+	 * @param username
+	 * @return
+	 */
+	@Override
+	public int queryUserByUsername(String username) {
+		return userDao.queryUserByUsername(username);
+	}
+
 
 }

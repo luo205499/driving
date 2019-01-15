@@ -3,6 +3,8 @@ package com.example.driving.com.dao;
 import com.example.driving.com.entity.Item;
 import org.springframework.stereotype.Repository;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * @author ${lcl}
  * @Title: IItemDao
@@ -49,6 +51,14 @@ public interface IItemDao {
      * @return
      */
     Item practiceOrder(int pageNum);
+
+
+    /**
+     * 针对练习
+     * @param pageNum
+     * @return
+     */
+    Item forPractice(int pageNum, HttpServletRequest request);
 
     /**
      * 添加题库

@@ -11,7 +11,6 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/index.js"></script>
     <script src="js/plug-in.min.js"></script>
-    <!--<script src="js/beijing.js"></script>-->
     <style>
         a:focus {
             text-decoration: none
@@ -53,10 +52,12 @@
             color: #5f5f5f;
             font-size: 14px;
         }
-        .xueChe .iconfont{
+
+        .xueChe .iconfont {
             font-size: 60px;
         }
-        .dropdown-menu{
+
+        .dropdown-menu {
             margin: 0;
             padding: 0;
             border: 1px solid #000;
@@ -64,16 +65,19 @@
             min-width: 100px;
             height: 55px;
         }
-        .dropdown-menu>li{
+
+        .dropdown-menu > li {
             width: 100px;
             border-radius: 4px;
         }
-        .dropdown-menu>li a{
+
+        .dropdown-menu > li a {
             color: #9a9a98;
             width: 100px;
             border-radius: 4px;
         }
-        .dropdown-menu>li a:hover{
+
+        .dropdown-menu > li a:hover {
             background: #000000;
             color: white;
             border-radius: 4px;
@@ -111,6 +115,18 @@
                 </li>
                 <li><a href="practice">随机练习</a></li>
                 <li><a href="practice2">顺序练习</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="">针对练习
+                        <span class="caret">
+                                </span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu" style="height:105px; ">
+                        <li><a href="toForPractice?role=3">图片题</a></li>
+                        <li><a href="toForPractice?role=2">文字题</a></li>
+                        <li><a href="toForPractice?role=1">选择题</a></li>
+                        <li><a href="toForPractice?role=0">判断题</a></li>
+                    </ul>
+                </li>
                 <li><a href="#">联系我们</a></li>
             </ul>
             <div class="profile navbar-right">
@@ -130,7 +146,7 @@
 <div class="coments">
     <div class="coment container">
         <div class="container text-center">
-            <h3 style="color: #1f1f1f;margin-bottom: 20px;margin-top: 70px;">重庆2019小车理论考试</h3>
+            <h3 style="color: #1f1f1f;margin-bottom: 20px;margin-top: 70px;">重庆<span class="time"></span>小车理论考试</h3>
         </div>
         <div class="ulSkills container row" style="margin-top: 20px;">
             <span class="list-group-item-heading col-md-6 col-sm-12" style=" font-size: 20px;
@@ -225,28 +241,34 @@
             <div class="xueChe col-xs-12 col-md-12" style="margin-bottom: 40px;">
                 <h3 class="text-center">学车流程</h3>
                 <div class="col-md-2 col-xs-4 text-center">
-                        <span class="iconfont icon-che1"></span>
-                        <br><h3>找驾校</h3>
+                    <span class="iconfont icon-che1"></span>
+                    <br>
+                    <h3>找驾校</h3>
                 </div>
                 <div class="col-md-2 col-xs-4 text-center">
                     <span class="iconfont icon-icon-kaoshijilu"></span>
-                    <br><h3>科目一</h3>
+                    <br>
+                    <h3>科目一</h3>
                 </div>
                 <div class="col-md-2 col-xs-4 text-center">
                     <span class="iconfont icon-cheliang"></span>
-                    <br><h3>科目二</h3>
+                    <br>
+                    <h3>科目二</h3>
                 </div>
                 <div class="col-md-2 col-xs-4 text-center">
                     <span class="iconfont icon-chepai"></span>
-                    <br><h3>科目三</h3>
+                    <br>
+                    <h3>科目三</h3>
                 </div>
                 <div class="col-md-2 col-xs-4 text-center">
                     <span class="iconfont icon-zaixiankaoshi"></span>
-                    <br><h3>科目四</h3>
+                    <br>
+                    <h3>科目四</h3>
                 </div>
                 <div class="col-md-2 col-xs-4 text-center">
                     <span class="iconfont icon-jiashizhengzhuanru"></span>
-                    <br><h3>拿本</h3>
+                    <br>
+                    <h3>拿本</h3>
                 </div>
             </div>
         </div>
@@ -255,10 +277,11 @@
 <!--fotter-->
 <footer style="background: #000;">
     <div class="container">
-        <div class="agile-footer-grids container">
+        <div class="agile-footer-grids container" style="color: #7f7f7f;">
             <div class="col-md-4 agile-footer-grid">
                 <p></p>
-               <span style="color: #fff">关于</span>&nbsp;<span style="color: #3e8efb;font-size: 16px;font-family: '微软雅黑'">BY一考通</span>
+                <span style="color: #fff">关于</span>&nbsp;<span
+                    style="color: #3e8efb;font-size: 16px;font-family: '微软雅黑'">BY一考通</span>
                 <div class="agile-footer-info">
                     <p style="color: #7f7f7f">BY一考通是一个可以免费在线刷题、练习、模拟考试的驾考模拟考试系统，用户登录后即可记录错题，考试完成生成成绩，计算考试合格率等。</p>
                     <h5 style="color: #7f7f7f">在此订阅</h5>
@@ -283,7 +306,7 @@
                             <p><i class="fa fa-calendar-o" aria-hidden="true">
                             </i> 驾校地址：重庆市巴南区八公里协信车时光内</p>
                         </div>
-                        <div class="clearfix"> </div>
+                        <div class="clearfix"></div>
                     </div>
                     <div class="agile-post-grid">
                         <div class="col-md-5 agile-post-left">
@@ -295,21 +318,22 @@
                             <h5><a href="#" style="color:#fff;">重庆驰晨驾校</a></h5>
                             <p><i class="fa fa-calendar-o" aria-hidden="true"></i> 驾校地址：重庆市重庆市渝北区G5001(空港互通)</p>
                         </div>
-                        <div class="clearfix"> </div>
+                        <div class="clearfix"></div>
                     </div>
                 </div>
             </div>
             <div class="col-md-4 agile-footer-grid">
                 <p></p>
-                <b style="color: #7f7f7f;font-size: 16px;">联系我们</b>
+                <b style="color: #ffffff;font-size: 16px;">联系我们</b>
                 <div class="popular-grids">
-                    <div class="popular-grid"style="margin-top: 10px;">
-                        <b href="#" class="text-center"><img src="images/weixin.jpg" width="100px;"><p></p>扫一扫，加我微信</b>
+                    <div class="popular-grid" style="margin-top: 10px;">
+                        <b href="#" class="text-center"><img src="images/weixin.jpg" width="100px;">
+                            <p></p>扫一扫，加我微信</b>
                     </div>
-                    <div class="clearfix"> </div>
+                    <div class="clearfix"></div>
                 </div>
             </div>
-            <div class="clearfix"> </div>
+            <div class="clearfix"></div>
         </div>
     </div>
 </footer>
@@ -329,18 +353,18 @@
                     <div class="form-group">
                         <label for="username">Username <span
                                 class="glyphicon glyphicon-user"></span> <input type="text"
-                                                                                   name="username" class="form-control"
-                                                                                   id="username"
-                                                                                   placeholder="输入用户名"
-                                                                                   style="padding-left: 22px"></label>
+                                                                                name="username" class="form-control"
+                                                                                id="username"
+                                                                                placeholder="输入用户名"
+                                                                                style="padding-left: 22px"></label>
                     </div>
                     <div class="form-group">
                         <label for="password">Password <span
                                 class="glyphicon glyphicon-lock"></span> <input type="password"
-                                                                                   name="password" class="form-control"
-                                                                                   id="password"
-                                                                                   placeholder="输入密码"
-                                                                                   style="padding-left: 22px"></label>
+                                                                                name="password" class="form-control"
+                                                                                id="password"
+                                                                                placeholder="输入密码"
+                                                                                style="padding-left: 22px"></label>
                     </div>
                     <div class="modal-footer">
                         <input type="submit" class="btn btn-group-xs" id="userLogin" style="color: white" value="登录">
@@ -367,10 +391,11 @@
                     <div class="form-group">
                         <label for="username">Username<span
                                 class="glyphicon glyphicon-user"></span> <input type="text"
-                                                              name="username" class="form-control"
-                                                              id="rusername"
-                                                              placeholder="输入用户名"
-                                                              style="padding-left: 22px"></label>
+                                                                                name="username" class="form-control"
+                                                                                id="rusername"
+                                                                                placeholder="输入用户名"
+                                                                                style="padding-left: 22px"></label>
+                        <br><i id="iusername" style="position: absolute;top:70px;"></i>
                     </div>
                     <div class="form-group">
                         <label for="password">Password <span
@@ -393,6 +418,10 @@
 </body>
 <script type="text/javascript">
     $(function () {
+        //获取当年
+        var now = new Date();
+        var time = now.getFullYear()
+        $(".time").text(time);
         //用户未登录，隐藏错题
         $(".wrongItem").hide();
         //申明localstorage
@@ -417,16 +446,16 @@
         }
 
 
-       /* $.Pop('',{
-            Title:"提示信息",//标题
-            Close:true,//是否显示关闭按钮 true(开)/false(关)
-            Animation:"layerFadeIn",// 默认动画
-            BoxBg:true, // 是否显示遮罩背景层 true(开)/false(关)
-            BoxDrag:true, // 是否可以移动弹出层 true(开)/false(关)
-            BoxBgopacity:0.6, // 遮罩层的透明度 0-1 0完全透明1完全黑暗
-            ZIndex:99999, // 弹出层的cssz-index属性
-            Class:false, // 是否叠加css样式
-        });*/
+        /* $.Pop('',{
+             Title:"提示信息",//标题
+             Close:true,//是否显示关闭按钮 true(开)/false(关)
+             Animation:"layerFadeIn",// 默认动画
+             BoxBg:true, // 是否显示遮罩背景层 true(开)/false(关)
+             BoxDrag:true, // 是否可以移动弹出层 true(开)/false(关)
+             BoxBgopacity:0.6, // 遮罩层的透明度 0-1 0完全透明1完全黑暗
+             ZIndex:99999, // 弹出层的cssz-index属性
+             Class:false, // 是否叠加css样式
+         });*/
         //登录
         $("#userLogin").on("click", function () {
             $.ajax({
@@ -438,32 +467,53 @@
                     storage.setItem("username", res.username);
                     storage.setItem("id", res.id);
                     storage.setItem("type", res.type);
-                    $.Pop('登录成功！','alert',function(){window.location.reload()})
+                    $.Pop('登录成功！', 'alert', function () {
+                        window.location.reload()
+                    })
                 },
                 error: function () {
                     // $.Pop('登录失败',{Animation:'slideFromTop',Title:"提示信息"});
-                    $.Pop('<h5>登录失败,请重新登录</h5>','alert',function(){window.location.reload()})
+                    $.Pop('<h5>登录失败,请重新登录</h5>', 'alert', function () {
+                        window.location.reload()
+                    })
                 }
             });
         });
 
         //注册
         $("#userRegister").on("click", function () {
-            $.ajax({
-                url: "/register",
-                type: "POST",
-                dataType: "json",
-                data: {username: $("#rusername").val(), password: $("#rpassword").val()},
-                success: function (res) {
-                    storage.setItem("username", res.username);
-                    storage.setItem("id", res.id);
-                    storage.setItem("type", res.type);
-                    $.Pop('<h5>注册成功</h5>','alert',function(){window.location.reload()});
-                }, error: function () {
-                    $.Pop('<h5>注册失败,请重新注册</h5>','alert',function(){window.location.reload()});
-                }
+            var myreg = /[^\s]/;
+            var myreg2 = /\w{5,17}$/;
+            //名称不能为空
+            if (!myreg.test($("#rusername").val())) {
+                $.Pro('用户名不能为空', {BoxBgopacity: 1});
+                $("#rusername").focus();
+            }
+            else if (!myreg2.test($("#rpassword").val())) {
+                $.Pro('请输入6~18密码', {BoxBgopacity: 1});
+                $("#rpassword").focus();
+            }
+            else {
+                    $.ajax({
+                        url: "/register",
+                        type: "POST",
+                        dataType: "json",
+                        data: {username: $("#rusername").val(), password: $("#rpassword").val()},
+                        success: function (res) {
+                            storage.setItem("username", res.username);
+                            storage.setItem("id", res.id);
+                            storage.setItem("type", res.type);
+                            $.Pop('<h5>注册成功</h5>', 'alert', function () {
+                                window.location.reload()
+                            });
+                        }, error: function () {
+                            $.Pop('<h5>注册失败,请重新注册</h5>', 'alert', function () {
+                                window.location.reload()
+                            });
+                        }
 
-            });
+                    });
+            }
         });
         //退出登录
         $("#loginOut").on("click", function () {
@@ -480,6 +530,38 @@
                 $(".itemdisplay").fadeIn(2000);
             }
         }
+
+        //判断用户是否存在
+        $("#rusername").on('blur',function () {
+           $.ajax({
+               url:'queryUserByUsername',
+               type:'post',
+               dataType:'json',
+               data:{username:$('#rusername').val()},
+               success:function (res) {
+                   if(res!=0){
+                       $("#iusername").html("<span style=\"color: red\">用户名已存在</span>");
+                       $("#rusername").focus();
+                   }else{
+                       $("#iusername").html("<span style=\"color: green\">用户名可以使用</span>");
+                   }
+               }
+           })
+        })
+
+        //enter提交登录、注册
+        $(document).keypress(function(e) {
+            // 回车键事件
+            if(e.which == 13) {
+                // jQuery(".confirmButton").click();
+                if($("#username").val()!=''){
+                    jQuery("#userLogin").click();
+                }
+                else if($("#rusername").val()!=''){
+                    jQuery("#userRegister").click();
+                }
+            }
+        });
     })
 </script>
 </html>

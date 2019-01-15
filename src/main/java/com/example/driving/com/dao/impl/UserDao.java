@@ -97,6 +97,22 @@ public class UserDao implements IUserDao {
         }
     }
 
+    /**
+     * 根据用户名查询用户
+     * @param username
+     * @return
+     */
+    @Override
+    public int queryUserByUsername(String username) {
+        String sql = "select * from user where username=?";
+        int result=0;
+        SqlRowSet res = jdbcTemplate.queryForRowSet(sql, username);
+        while (res.next()){
+             result=1;
+        }
+        return result;
+    }
+
     //保存用户信息
     private User generateEntity(SqlRowSet rs) {
         User sa = new User();

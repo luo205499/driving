@@ -1,6 +1,7 @@
 package com.example.driving.com.service.impl;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import com.example.driving.com.dao.IItemDao;
 import com.example.driving.com.entity.Item;
@@ -56,6 +57,16 @@ public class ItemService implements IItemService {
 	@Override
 	public int addItem(Item item) {
 		return itemDao.addItem(item);
+	}
+
+	/**
+	 * 针对练习
+	 * @param pageNum
+	 * @return
+	 */
+	@Override
+	public Item forPractice(int pageNum,HttpServletRequest request) {
+		return itemDao.forPractice(pageNum,request);
 	}
 
 }

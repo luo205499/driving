@@ -80,6 +80,16 @@ public class UserController {
 		return userService.queryUser(id,pageNo,pageSize);
 	}
 
+	/**
+	 * 根据用户名查询用户
+	 * @param username
+	 * @return
+	 */
+	@RequestMapping("queryUserByUsername")
+	@ResponseBody
+	public int queryUserByUsername(String username) {
+		return userService.queryUserByUsername(username);
+	}
 	@RequestMapping("queryUserAll")
 	@ResponseBody
 	public List queryUser(int id){

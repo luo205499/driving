@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>顺序练习</title>
+    <title>针对练习</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <script src="js/jquery-3.2.1.js"></script>
@@ -23,11 +23,11 @@
             position: absolute;
             top: 117px;
             left: 20px; }
-
-        .all{
+        .all {
             position: absolute;
             z-index: 999;
         }
+
         .listExam {
             margin-top: 190px;
             border: solid 1px #3d3d3d;
@@ -42,16 +42,26 @@
             margin-left: 40px;
             margin-top: 20px;
         }
-        .listExam{
+
+        .listExam {
             color: #d1f5de;
         }
+
+        .canvas {
+            position: absolute;
+            z-index: 666;
+            right: -20px;
+        }
+
         .navbar-inverse input[type="text"] {
             background: #313131;
             border: none;
-            color: #999; }
+            color: #999;
+        }
 
         .navbar-inverse .navbar-form {
-            position: relative; }
+            position: relative;
+        }
 
         .navbar-form button[type="submit"] {
             background: #313131;
@@ -59,14 +69,20 @@
             color: #999;
             position: absolute;
             top: 28%;
-            right: 8%; }
+            right: 8%;
+        }
 
         @media (min-width: 768px) {
             .navbar-form button[type="submit"] {
-                top: 15%; } }
+                top: 15%;
+            }
+        }
+
         .img img {
             width: 200px;
-            height: 160px; }
+            height: 160px;
+        }
+
         .t1{
             background: #fff;
             border-radius: 6%;
@@ -176,7 +192,6 @@
     <canvas class="canvas" id="canvas" style="display:block; margin:50px auto;">当前浏览器不支持canvascanvas</canvas>
     <!--<button class="btn btn-success">按钮</button>-->
 </div>
-
 <!--弹出框-->
 <div class="t1 col-md-3 col-xs-8" style="margin-left: 60px;">
     <div class="modal-header text-success" style="font-size: 12px;">
@@ -186,7 +201,6 @@
         暂未练习，请练习......
     </div>
 </div>
-
 <!--登录-->
 <div class="modal fade login-modal" id="login-modal" tabindex="-1">
     <div class="modal-dialog modal-sm">
@@ -203,18 +217,18 @@
                     <div class="form-group">
                         <label for="username">Username <span
                                 class="glyphicon glyphicon-user"></span> <input type="text"
-                                                                                   name="username" class="form-control"
-                                                                                   id="username"
-                                                                                   placeholder="输入用户名"
-                                                                                   style="padding-left: 22px"></label>
+                                                                                name="username" class="form-control"
+                                                                                id="username"
+                                                                                placeholder="输入用户名"
+                                                                                style="padding-left: 22px"></label>
                     </div>
                     <div class="form-group">
                         <label for="password">Password <span
                                 class="glyphicon glyphicon-lock"></span> <input type="password"
-                                                                                   name="password" class="form-control"
-                                                                                   id="password"
-                                                                                   placeholder="输入密码"
-                                                                                   style="padding-left: 22px"></label>
+                                                                                name="password" class="form-control"
+                                                                                id="password"
+                                                                                placeholder="输入密码"
+                                                                                style="padding-left: 22px"></label>
                     </div>
                     <div class="modal-footer">
                         <input type="submit" class="btn btn-group-xs" id="userLogin" style="color: white;background: #000;" value="登录">
@@ -227,44 +241,6 @@
 </div>
 
 <!--注册-->
-<div class="modal fade login-modal" id="register-modal" tabindex="-1">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button class="close" data-dismiss="modal">&times;</button>
-                <h4>
-                    <b>用户注册</b>
-                </h4>
-            </div>
-            <div class="modal-body">
-                <div id="form2">
-                    <div class="form-group">
-                        <label for="username">Username <span
-                                class="glyphicon glyphicon-user"></span><input type="text"
-                                                              name="username" class="form-control"
-                                                              id="rusername"
-                                                              placeholder="输入用户名"
-                                                              style="padding-left: 22px"></label>
-                        <br><i id="iusername" style="position: absolute;top:70px;"></i>
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Password<span
-                                class="glyphicon glyphicon-lock"></span>
-                            <input type="password"
-                                   name="password" class="form-control"
-                                   id="rpassword"
-                                   placeholder="输入密码"
-                                   style="padding-left: 22px"></label>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-group-xs" style="color: white;background: #000;" id="userRegister">注册
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 </body>
 <script src="js/beijing.js"></script>
 <script>
@@ -280,7 +256,7 @@
                     $(".tishi").html("第" + itemID + "题回答正确");
                 } else {
                     $(".tishi").html("第" + itemID + "题回答错误,正确答案:" + answer);
-                    addWrongItem()
+                    addWrongItem();
                 }
 
             })
@@ -299,6 +275,7 @@
         var itemD = "";
         var img = "";
         var type = 0;
+        var id = 0;
 
         //保存错题
         function addWrongItem() {
@@ -329,13 +306,12 @@
             }
         }
 
-
         //获取试题
         getItem();
 
         function getItem() {
             $.ajax({
-                url: "practiceOrder",
+                url: "forPractice",
                 async: true,
                 data: {
                     pageNum: pageNum
@@ -343,6 +319,7 @@
                 type: "POST",
                 dataType: "json",
                 success: function (res) {
+                    id = res.id;
                     answer = res.answer;
                     coments = res.coments;
                     itemA = res.itemA;
@@ -373,44 +350,6 @@
             pageStart = pageStart + 1;
             return answer;
         }
-
-        //显示\隐藏题库
-        itemdisplay();
-
-        function itemdisplay() {
-            if (storage.getItem("type") == 1) {
-                $(".itemdisplay").fadeIn(2000);
-            }
-        }
-
-        //登陆成功后隐藏登录注册按钮
-        function displayuser() {
-            a = $(".usernamedisplay").text();
-            if (a != "") {
-                /* $(".displaylogin").css('display', 'none');
-                 $(".nowuser").css('display', 'block');*/
-                $(".wrongItem").fadeIn(1000);
-                $(".displaylogin").fadeOut(1000);
-                $(".nowuser").fadeIn(2000);
-            }
-        }
-        //判断用户是否存在
-        $("#rusername").on('blur',function () {
-            $.ajax({
-                url:'queryUserByUsername',
-                type:'post',
-                dataType:'json',
-                data:{username:$('#rusername').val()},
-                success:function (res) {
-                    if(res!=0){
-                        $("#iusername").html("<span style=\"color: red\">用户名已存在</span>");
-                        $("#rusername").focus();
-                    }else{
-                        $("#iusername").html("<span style=\"color: green\">用户名可以使用</span>");
-                    }
-                }
-            })
-        })
         //登录
         $("#userLogin").on("click", function () {
             $.ajax({
@@ -425,7 +364,7 @@
                     $.Pop('<h5>登录成功</h5>','alert',function(){window.location.reload()});
                 },
                 error: function () {
-                    $.Pop('<h5>登录失败,请重新登录</h5>','alert',function(){window.location.reload()});
+                    $.Pop('<h5>登录失败，请重新登录</h5>','alert',function(){window.location.reload()});
                 }
             });
         });
@@ -485,6 +424,26 @@
             localStorage.removeItem("type");
             window.location.reload(); //刷新当前页面
         });
+        //显示\隐藏题库
+        itemdisplay();
+
+        function itemdisplay() {
+            if (storage.getItem("type") == 1) {
+                $(".itemdisplay").fadeIn(2000);
+            }
+        }
+        //登陆成功后隐藏登录注册按钮
+        function displayuser() {
+            a = $(".usernamedisplay").text();
+            if (a != "") {
+                /* $(".displaylogin").css('display', 'none');
+                 $(".nowuser").css('display', 'block');*/
+                $(".wrongItem").fadeIn(1000);
+                $(".displaylogin").fadeOut(1000);
+                $(".nowuser").fadeIn(2000);
+            }
+        }
+
         var storage = window.localStorage;
         //从localstorage获得用户信息
         $(".usernamedisplay").text(storage.getItem("username"));

@@ -3,6 +3,8 @@ package com.example.driving.com.service;
 
 import com.example.driving.com.entity.Item;
 
+import javax.servlet.http.HttpServletRequest;
+
 public interface IItemService {
 
 	/**
@@ -49,4 +51,11 @@ public interface IItemService {
 	 * @return
 	 */
 	int addItem(Item item);
+
+	/**
+	 * 针对练习
+	 * @param pageNum
+	 * @return
+	 */
+	Item forPractice(int pageNum,HttpServletRequest request);
 }

@@ -7,6 +7,7 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -101,6 +102,39 @@ public class ItemDao implements IItemDao {
         while (rs.next()) {
             itemList.add(generateItem(rs));
         }
+        Item ite = itemList.get(pageNum);
+        return ite;
+    }
+
+
+    /**
+     * 针对练习
+     * @param pageNum
+     * @return
+     */
+    @Override
+    public Item forPractice(int pageNum,HttpServletRequest request) {
+        String sql = "";
+        SqlRowSet rs = null;
+        int role = (int) request.getSession().getAttribute("role");
+        if(role==1||role==0){
+             sql = "select * from item  where type=?";
+             rs = jdbcTemplate.queryForRowSet(sql,role);
+        }
+       else if(role==2){
+            sql="select * from item where img='' or img is null";
+            rs = jdbcTemplate.queryForRowSet(sql);
+        }
+        else{
+            sql="select * from item where img!='' and img is not null";
+            rs = jdbcTemplate.queryForRowSet(sql);
+        }
+        List<Item> itemList=new ArrayList();
+        while (rs.next()) {
+            itemList.add(generateItem(rs));
+        }
+        Random rand=new Random();
+        Collections.shuffle(itemList,rand);
         Item ite = itemList.get(pageNum);
         return ite;
     }
