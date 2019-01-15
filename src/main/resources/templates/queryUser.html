@@ -15,6 +15,7 @@
     <script src="js/jquery-3.2.1.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/plug-in.min.js"></script>
+    <script src="js/beijing.js"></script>
     <style>
         html, body {
             overflow: hidden;
@@ -40,17 +41,6 @@
             color: #d1f5de;
         }
 
-        .list-group-item-heading {
-            list-style: none;
-            color: whitesmoke;
-            margin-left: 40px;
-            margin-top: 20px;
-        }
-        .canvas{
-            position: absolute;
-            z-index: 666;
-            right: -20px;
-        }
         .navbar-inverse input[type="text"] {
             background: #313131;
             border: none;
@@ -156,8 +146,9 @@
 </nav>
 <!--试题-->
 <div class="all">
-    <div class="container">
+    <div class="row container">
         <div class="tableUser col-md-8 col-sm-12 col-xs-12">
+            <h3>用户信息</h3>
             <span id="userJige" style="font-family: '微软雅黑';font-size: 16px;">考试合格率：</span><br>
             <table class="table table-bordered">
                 <th class=" text-center username">试卷id</th>
@@ -167,12 +158,12 @@
                 <th class=" text-center examItem" id="examTime">考试时间</th>
                 <tbody class="listUser"></tbody>
             </table>
+            <div class="listUser2"></div>
             <button class="btn btn-success" id="above">上一页</button>
             <button class="btn btn-success" id="next">下一页</button>
         </div>
 
     </div>
-    <canvas class="canvas" id="canvas" style="display:block; margin:50px auto;">当前浏览器不支持canvascanvas</canvas>
 </div>
 
 <!--登录-->
@@ -253,8 +244,8 @@
         </div>
     </div>
 </div>
+
 </body>
-<script src="js/beijing.js"></script>
 <script>
     $(function () {
         var storage=window.localStorage;
@@ -294,7 +285,9 @@
                 dataType : "json",
                 success : function(res) {
                     if(res.length==0){
-                        $(".listUser").html("<div class='text-center list-group-item-heading'>" +"暂无数据......" + "</div>");
+                        $(".listUser2").html("<div class='text-center' style=''>" +"暂无数据......" + "</div>");
+                        $(".listUser").html("");
+                        $('#next').attr('disabled',"true");//添加disabled属性
                     }else{
                         var jige=0;
                         var i=0;
@@ -304,6 +297,8 @@
                             }
                         }
                         $("#userJige").html("考试合格率:"+(jige/i).toFixed(4)/10*1000+"%");
+                        $(".listUser2").html("");
+                        $('#next').removeAttr("disabled"); //移除disabled属性
                     }
                 }
             });
@@ -323,7 +318,9 @@
                 dataType : "json",
                 success : function(res) {
                   if(res.length==0){
-                      $(".listUser").html("<div class='text-center list-group-item-heading'>" +"暂无数据......" + "</div>");
+                      $(".listUser2").html("<div class='text-center' style=''>" +"暂无数据......" + "</div>");
+                      $(".listUser").html("");
+                      $('#next').attr('disabled',"true");//添加disabled属性
                   }else{
                       var i=0;
                       var type="";
@@ -350,6 +347,8 @@
                         html += "</tr>";
                     }
                     $(".listUser").html(html);
+                      $(".listUser2").html("");
+                      $('#next').removeAttr("disabled"); //移除disabled属性
                   }
                     pageNo=pageNo+pageSize;
                 }
