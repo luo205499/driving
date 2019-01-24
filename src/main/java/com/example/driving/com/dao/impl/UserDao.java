@@ -113,6 +113,22 @@ public class UserDao implements IUserDao {
         return result;
     }
 
+    /**
+     * 用户排行
+     * @return
+     */
+    @Override
+    public List orderByUser() {
+        String sql = "select u.username,max(e.grade) grade,e.type,e.examTime from user as u,exam as e where u.id=e.u_id and e.grade>90 GROUP by u.id limit 3";
+        List<Map<String,Object>> list = jdbcTemplate.queryForList(sql);
+        if(list==null){
+            return null;
+        }
+        else{
+            return list;
+        }
+    }
+
     //保存用户信息
     private User generateEntity(SqlRowSet rs) {
         User sa = new User();

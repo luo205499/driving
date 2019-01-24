@@ -48,4 +48,10 @@ public interface IUserDao {
      * @return
      */
     int queryUserByUsername(String username);
+
+    /**
+     * 用户排行
+     * @return
+     */
+    List orderByUser();
 }

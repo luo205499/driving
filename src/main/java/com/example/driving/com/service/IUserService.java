@@ -43,4 +43,10 @@ public interface IUserService {
 	 * @return
 	 */
 	int queryUserByUsername(String username);
+
+	/**
+	 * 成绩排行
+	 * @return
+	 */
+	 List orderByUser();
 }

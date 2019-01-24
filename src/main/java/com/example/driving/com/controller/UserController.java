@@ -1,17 +1,12 @@
 package com.example.driving.com.controller;
 
-
-
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import com.example.driving.com.entity.User;
 import com.example.driving.com.service.IUserService;
+import com.example.driving.com.util.JiaMi;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-
 import java.util.List;
-
 
 @Controller
 public class UserController {
@@ -33,7 +28,8 @@ public class UserController {
     @RequestMapping(value="login",method = RequestMethod.POST)
 	@ResponseBody
 	public User loginTest(String username,String password){
-		User user = userService.loginTest(username,password);
+		JiaMi jiaMi=new JiaMi();
+		User user = userService.loginTest(username,jiaMi.MD5Jiami(password));
 		if(user!=null){
 			return user;
 		}else{
@@ -55,7 +51,8 @@ public class UserController {
 	@ResponseBody
 	public User register(String username,String password){
 		User result=null;
-		User re = userService.saveUser(username, password);
+		JiaMi jiaMi=new JiaMi();
+		User re = userService.saveUser(username, jiaMi.MD5Jiami(password));
 		if(re!=null){
 			result= re;
 		}
@@ -90,15 +87,41 @@ public class UserController {
 	public int queryUserByUsername(String username) {
 		return userService.queryUserByUsername(username);
 	}
+
+	/**
+	 * 查询用户
+	 * @param id
+	 * @return
+	 */
 	@RequestMapping("queryUserAll")
 	@ResponseBody
 	public List queryUser(int id){
 		return userService.queryUserAll(id);
 	}
+
+	/**
+	 * 成绩排行
+	 * @return
+	 */
+	@RequestMapping("orderByUser")
+	@ResponseBody
+	public List orderByUser(){
+		return userService.orderByUser();
+	}
+
+	/**
+	 * 主页
+	 * @return
+	 */
 	@RequestMapping("/")
 	public String pageIndex(){
 		return "pageIndex";
 	}
+
+	/**
+	 * 返回主页
+	 * @return
+	 */
 	@RequestMapping("/backHome")
 	public String backHome(){
 		return "pageIndex";

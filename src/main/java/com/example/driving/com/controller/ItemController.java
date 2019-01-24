@@ -155,6 +155,8 @@ public class ItemController {
 		int re2=itemService.addItem(item);
 		if (re2>0){
 			re="<script>alert(\"添加试题成功\");window.location.href='toaddItem';</script>";
+		}else{
+			re="<script>alert(\"添加试题失败，请重新添加\");window.location.href='toaddItem';</script>";
 		}
 		return re;
 	}

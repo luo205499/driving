@@ -11,6 +11,7 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/index.js"></script>
     <script src="js/plug-in.min.js"></script>
+    <script src="js/jquery.qrcode.min.js"></script>
     <style>
         a:focus {
             text-decoration: none
@@ -82,6 +83,11 @@
             color: white;
             border-radius: 4px;
         }
+        .fixediv{position:fixed;top:140px;z-index:9999;width:120px;height:216px;background: rgba(221, 221, 221, 0.07);}
+        .fixediv img{float:left;}
+        .fixediv a.close{display:block;width:20px;font-size:14px;color:#5e5e5e;text-decoration:none;text-align:center;}
+        /*.leftadv{left:0px;}*/
+        .rightadv{right:20px;}
     </style>
 </head>
 <body>
@@ -127,7 +133,6 @@
                         <li><a href="toForPractice?role=0">判断题</a></li>
                     </ul>
                 </li>
-                <li><a href="#">联系我们</a></li>
             </ul>
             <div class="profile navbar-right">
                 <ul class="nav navbar-nav">
@@ -415,9 +420,73 @@
         </div>
     </div>
 </div>
+<!--扫码-->
+<div id="fixediv" class="fixediv rightadv text-center hidden-xs" style="height:260px;border: 1px solid #b6b8b7;background: #f1f1f1; border-radius: 6%;">
+    <a class="close" style="font-size: 18px;color: #f00">x</a><br>
+    <span style="font-size: 14px;color: rgba(142,142,143,0.97);">扫码考试</span><p></p>
+    <div id="qrcode" style="margin-bottom: 5px;"></div>
+    <a href="#" class="weixin"><span class="iconfont icon-weixin" style="font-size:18px;padding: 5px;color: green "></span>关注微信</a><p></p>
+    <a href="#" class="weibo"><span class="iconfont icon-xinlangweibo" style="font-size:16px;padding: 5px;color: red "></span>关注微博</a><p></p>
+    <a href="#"  style="line-height: 30px;color:rgba(142,142,143,0.97); " id="goToTop"><i class="glyphicon glyphicon-plane" style="font-size: 14px;padding: 5px;"></i>
+        返回顶部</a>
+   <!-- <h4 class="container"><b>BY车神</b></h4>
+    <ul class="list-unstyled gradePaiHang">
+        <li id="usernamePaiHang"><span >姓名</span> </li>
+        <li id="gradePaiHang"> 分数</span></li>
+    </ul>-->
+    <div class="weixinQr hidden" style="position: absolute;top:50px;left:-120px; ">
+        <b href="#" class="text-center"><img src="images/weixin.jpg" width="120px;">
+            <p style="font-size: 12px;color: rgba(142,142,143,0.97); ">扫一扫，加我微信</p></b>
+    </div>
+    <div class="weiboQr hidden" style="position: absolute;top:80px;left:-120px; ">
+        <b href="#" class="text-center"><img src="images/weibo.png" width="110px;">
+            <p style="font-size: 12px;color: rgba(142,142,143,0.97); ">扫一扫，加我微博</p></b>
+    </div>
+</div>
 </body>
 <script type="text/javascript">
     $(function () {
+
+        /**
+         * 获取当前项目的路径
+         * http://localhost:8083/proj
+         */
+        function getRootPath(){
+            //获取当前网址，如： http://localhost:8083/proj/meun.jsp
+            var curWwwPath = window.document.location.href;
+            //获取主机地址之后的目录，如： proj/meun.jsp
+            var pathName = window.document.location.pathname;
+            var pos = curWwwPath.indexOf(pathName);
+            //获取主机地址，如： http://localhost:8083
+            var localhostPath = curWwwPath.substring(0, pos);
+            //获取带"/"的项目名，如：/proj
+            var projectName = pathName.substring(0, pathName.substr(1).indexOf('/')+1);
+            return(localhostPath + projectName);
+        }
+
+        //返回顶部
+        $('#goToTop').click(function(){
+            if(scrollTop>0){
+                $('html ,body').animate({scrollTop: 0}, 300);
+                return false;
+            }
+        });
+        //生成二维码
+        qrcode(getRootPath());
+        function  qrcode(e){
+
+            $('#qrcode').qrcode({
+                render : "canvas",  //设置渲染方式:table和canvas，使用canvas方式性能相对来说比较好
+                width: 80,   //默认宽度
+                height: 80, //默认高度
+                typeNumber: -1,   //计算模式一般默认为-1
+                correctLevel: 2, //二维码纠错级别
+                background: "#ffffff",  //背景颜色
+                foreground: "#000000",  //二维码颜色
+                text: e, //二维码内容：可以直接填一个网址
+            });
+        }
+
         //获取当年
         var now = new Date();
         var time = now.getFullYear()
@@ -473,9 +542,7 @@
                 },
                 error: function () {
                     // $.Pop('登录失败',{Animation:'slideFromTop',Title:"提示信息"});
-                    $.Pop('<h5>登录失败,请重新登录</h5>', 'alert', function () {
-                        window.location.reload()
-                    })
+                    $.Pop('<h5>登录失败,请重新登录</h5>', 'alert', function () {})
                 }
             });
         });
@@ -530,7 +597,32 @@
                 $(".itemdisplay").fadeIn(2000);
             }
         }
-
+        // orderByUser();
+        //排行orderByUser
+        function orderByUser() {
+            var html = "";
+            $.ajax({
+                url:'orderByUser',
+                type:'post',
+                dataType:'json',
+                success:function (res) {
+                    if(res.length>0){
+                        for(var i=0;i<res.length;i++){
+                            console.log(res[i].username);
+                            /*$("#usernamePaiHang").html(res[i].username);
+                            $("#gradePaiHang").html(res[i].grade);*/
+                            html += "<li class=''>";
+                            html += "<span>" +"姓名:"+ res[i].username + "</span>";
+                            html += "<span>" +"成绩:"+res[i].grade+ "</span>";
+                            html += "</li>";
+                        }
+                        $(".gradePaiHang").html(html);
+                    }else{
+                        $(".gradePaiHang").hide();
+                    }
+                }
+            })
+        }
         //判断用户是否存在
         $("#rusername").on('blur',function () {
            $.ajax({
@@ -562,6 +654,48 @@
                 }
             }
         });
-    })
+
+        //微信
+        $(".weixin").hover(function () {
+           $(".weixinQr").removeClass("hidden");
+        },function () {
+            $(".weixinQr").addClass("hidden");
+        })
+        //微博
+        $(".weibo").hover(function () {
+            $(".weiboQr").removeClass("hidden");
+        },function () {
+            $(".weiboQr").addClass("hidden");
+        })
+    });
+
+    // 扫码考试框
+    $(document).ready(function(){
+        $(".fixediv a").click(function(){
+            $(".fixediv").fadeOut(400);
+        });
+        $(".fixediv").floatadv();
+    });
+    jQuery.fn.floatadv = function(loaded) {
+        var obj = this;
+        body_height = parseInt($(window).height());
+        block_height = parseInt(obj.height());
+        top_position = parseInt((body_height/2) - (block_height/2) + $(window).scrollTop());
+        if (body_height<block_height) { top_position = 0 + $(window).scrollTop(); };
+        if(!loaded) {
+            obj.css({'position': 'absolute'});
+            obj.css({ 'top': top_position });
+            $(window).bind('resize', function() {
+                obj.floatadv(!loaded);
+            });
+            $(window).bind('scroll', function() {
+                obj.floatadv(!loaded);
+            });
+        } else {
+            obj.stop();
+            obj.css({'position': 'absolute'});
+            obj.animate({ 'top': top_position }, 400, 'linear');
+        }
+    }
 </script>
 </html>

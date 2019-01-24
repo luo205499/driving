@@ -21,6 +21,7 @@ body {
 @media (min-width: 768px) {
   .navbar-form button[type="submit"] {
     top: 15%; } }
+
 .item img {
   width: 100%; }
 

@@ -68,5 +68,14 @@ public class UserService implements IUserService {
 		return userDao.queryUserByUsername(username);
 	}
 
+	/**
+	 * 成绩排行
+	 * @return
+	 */
+	@Override
+	public List orderByUser() {
+		return userDao.orderByUser();
+	}
+
 
 }
