@@ -463,6 +463,16 @@
             var projectName = pathName.substring(0, pathName.substr(1).indexOf('/')+1);
             return(localhostPath + projectName);
         }
+        function getRootPath_dc() {
+            var pathName = window.location.pathname.substring(1);
+            var webName = pathName == '' ? '' : pathName.substring(0, pathName.indexOf('/'));
+            if (webName == "") {
+                return window.location.protocol + '//' + window.location.host;
+            }
+            else {
+                return window.location.protocol + '//' + window.location.host + '/' + webName;
+            }
+        }
 
         //返回顶部
         $('#goToTop').click(function(){
@@ -472,7 +482,7 @@
             }
         });
         //生成二维码
-        qrcode(getRootPath());
+        qrcode(getRootPath_dc());
         function  qrcode(e){
 
             $('#qrcode').qrcode({
