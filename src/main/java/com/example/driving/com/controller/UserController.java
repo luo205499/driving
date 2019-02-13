@@ -2,8 +2,11 @@ package com.example.driving.com.controller;
 
 import javax.annotation.Resource;
 import com.example.driving.com.entity.User;
+import com.example.driving.com.service.IEmailService;
 import com.example.driving.com.service.IUserService;
+import com.example.driving.com.service.impl.EmailService;
 import com.example.driving.com.util.JiaMi;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -12,6 +15,9 @@ import java.util.List;
 public class UserController {
 	@Resource(name="userService")
 	private IUserService userService;
+
+	@Autowired
+	private IEmailService emailService;
 
 	/**
 	 * 登录验证
@@ -109,6 +115,11 @@ public class UserController {
 		return userService.orderByUser();
 	}
 
+	@RequestMapping("getEamil")
+	@ResponseBody
+	public boolean Eamil(String to, String subject, String content){
+		return 	emailService.sendSimpleMail(to,subject,content);
+	}
 	/**
 	 * 主页
 	 * @return

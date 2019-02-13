@@ -34,7 +34,11 @@ body {
   position: absolute;
   top: 117px;
   left: 20px; }
-
+.glyphicon-envelope{
+  position: absolute;
+  top: 192px;
+  left: 20px;
+}
 .carousel {
   background-color: #000;
   height: 100%; }
